@@ -1,6 +1,17 @@
 {
-  "lastUpdated": "2026-01-29T07:36:45.463887Z",
+  "lastUpdated": "2026-01-29T07:40:40.717663Z",
   "lessons": [
+    {
+      "id": "les_fc8c893b",
+      "subject": "Science",
+      "topic": "Simple machines",
+      "ages": "7-9",
+      "duration": "30",
+      "country": "Kenya",
+      "teacher_name": "Charles",
+      "public": true,
+      "created_at": "2026-01-29T07:40:40.717656Z"
+    },
     {
       "id": "les_375623f3",
       "subject": "Science",
