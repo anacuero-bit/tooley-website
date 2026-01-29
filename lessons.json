@@ -1,6 +1,17 @@
 {
-  "lastUpdated": "2026-01-29T07:07:20.884760Z",
+  "lastUpdated": "2026-01-29T07:36:45.463887Z",
   "lessons": [
+    {
+      "id": "les_375623f3",
+      "subject": "Science",
+      "topic": "Water cycle",
+      "ages": "9-11",
+      "duration": "30",
+      "country": "Global",
+      "teacher_name": "Bubu",
+      "public": true,
+      "created_at": "2026-01-29T07:36:45.463873Z"
+    },
     {
       "id": "les_27f33c65",
       "subject": "SOCIAL STUDIES",
