@@ -1,0 +1,49 @@
+{
+  "lastUpdated": "2026-01-29T12:00:00Z",
+  "lessons": [
+    {
+      "id": "les_sample1",
+      "subject": "Mathematics",
+      "topic": "Fractions: Fair Sharing",
+      "ages": "8-10",
+      "duration": "45",
+      "country": "Kenya",
+      "teacher_name": "Teacher Mary",
+      "public": true,
+      "created_at": "2026-01-28T10:00:00Z"
+    },
+    {
+      "id": "les_sample2",
+      "subject": "Science",
+      "topic": "The Water Cycle",
+      "ages": "10-12",
+      "duration": "40",
+      "country": "India",
+      "teacher_name": "Priya S.",
+      "public": true,
+      "created_at": "2026-01-28T11:00:00Z"
+    },
+    {
+      "id": "les_sample3",
+      "subject": "Language",
+      "topic": "Storytelling Basics",
+      "ages": "6-8",
+      "duration": "30",
+      "country": "Nigeria",
+      "teacher_name": "Teacher Chioma",
+      "public": true,
+      "created_at": "2026-01-28T12:00:00Z"
+    },
+    {
+      "id": "les_sample4",
+      "subject": "Social Studies",
+      "topic": "Community Helpers",
+      "ages": "7-9",
+      "duration": "35",
+      "country": "Philippines",
+      "teacher_name": "Teacher Joy",
+      "public": true,
+      "created_at": "2026-01-28T13:00:00Z"
+    }
+  ]
+}
