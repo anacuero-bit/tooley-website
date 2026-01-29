@@ -3,65 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tooley – Free AI Lesson Plans for Teachers</title>
-    <meta name="description" content="Generate customized lesson plans in seconds. Free forever for teachers in low-resource schools worldwide.">
+    <title>Tooley - AI Lesson Plans for Teachers</title>
+    <meta name="description" content="Free AI-powered lesson plan generator for teachers in low-resource schools. Create structured, curriculum-aligned lesson plans in minutes.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --color-amber: #d97706;
-            --color-amber-dark: #b45309;
-            --color-amber-light: #fbbf24;
-            --color-ink: #111827;
-            --color-slate: #475569;
-            --color-muted: #94a3b8;
-            --color-border: #e2e8f0;
-            --color-bg: #ffffff;
-            --color-bg-soft: #f8fafc;
-            --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        }
-        
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        body {
-            font-family: var(--font);
-            background: var(--color-bg);
-            color: var(--color-ink);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
+        :root {
+            --amber: #d97706;
+            --amber-dark: #b45309;
+            --amber-light: #fbbf24;
+            --amber-bg: #fffbeb;
+            --navy: #0f172a;
+            --navy-light: #1e293b;
+            --slate: #64748b;
+            --white: #ffffff;
+            --gray-50: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
         }
         
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--white);
+            color: var(--navy);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
         /* Header */
         header {
-            padding: 16px 24px;
-            border-bottom: 1px solid var(--color-border);
-            background: var(--color-bg);
             position: sticky;
             top: 0;
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-200);
             z-index: 100;
+            padding: 12px 0;
         }
         
         .header-inner {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 24px;
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
         }
         
         .logo {
             height: 32px;
+            width: auto;
         }
         
         .header-cta {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--color-amber);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 8px;
+            background: var(--amber);
+            color: var(--white);
+            padding: 8px 20px;
+            border-radius: 6px;
             text-decoration: none;
             font-weight: 600;
             font-size: 14px;
@@ -69,35 +68,40 @@
         }
         
         .header-cta:hover {
-            background: var(--color-amber-dark);
+            background: var(--amber-dark);
         }
-        
-        .header-cta svg {
-            width: 18px;
-            height: 18px;
-        }
-        
+
         /* Hero */
         .hero {
             padding: 80px 24px 60px;
             text-align: center;
-            max-width: 800px;
+            background: linear-gradient(180deg, var(--white) 0%, var(--gray-50) 100%);
+        }
+        
+        .hero-content {
+            max-width: 700px;
             margin: 0 auto;
         }
         
         .hero h1 {
             font-size: clamp(28px, 5vw, 42px);
             font-weight: 700;
-            color: var(--color-ink);
+            color: var(--navy);
             line-height: 1.2;
             margin-bottom: 16px;
         }
         
+        .hero h1 span {
+            color: var(--amber);
+        }
+        
         .hero p {
             font-size: 18px;
-            color: var(--color-slate);
-            max-width: 560px;
-            margin: 0 auto 32px;
+            color: var(--slate);
+            margin-bottom: 32px;
+            max-width: 520px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .hero-buttons {
@@ -111,120 +115,82 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 14px 24px;
-            border-radius: 10px;
+            padding: 14px 28px;
+            border-radius: 8px;
             font-weight: 600;
             font-size: 15px;
             text-decoration: none;
             transition: all 0.2s;
-            border: none;
-            cursor: pointer;
         }
         
         .btn-primary {
-            background: var(--color-amber);
-            color: white;
+            background: var(--amber);
+            color: var(--white);
         }
         
         .btn-primary:hover {
-            background: var(--color-amber-dark);
+            background: var(--amber-dark);
             transform: translateY(-1px);
         }
         
         .btn-secondary {
-            background: var(--color-bg-soft);
-            color: var(--color-ink);
-            border: 1px solid var(--color-border);
+            background: var(--navy);
+            color: var(--white);
         }
         
         .btn-secondary:hover {
-            background: var(--color-border);
+            background: var(--navy-light);
+            transform: translateY(-1px);
         }
         
         .btn svg {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
         }
-        
-        /* QR Section (Desktop) */
-        .qr-section {
-            display: none;
-            margin-top: 40px;
-            padding-top: 32px;
-            border-top: 1px solid var(--color-border);
-        }
-        
-        @media (min-width: 768px) {
-            .qr-section {
-                display: block;
-            }
-        }
-        
-        .qr-wrapper {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-        }
-        
-        .qr-code {
-            width: 120px;
-            height: 120px;
-            border-radius: 12px;
-            border: 1px solid var(--color-border);
-        }
-        
-        .qr-text {
-            text-align: left;
-        }
-        
-        .qr-text p {
-            font-size: 14px;
-            color: var(--color-slate);
-            margin: 0;
-        }
-        
-        .qr-text code {
-            display: inline-block;
-            margin-top: 4px;
-            background: var(--color-bg-soft);
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--color-ink);
-        }
-        
+
         /* How It Works */
         .how-it-works {
-            background: var(--color-bg-soft);
-            padding: 60px 24px;
+            padding: 80px 24px;
+            background: var(--gray-50);
+            border-top: 1px solid var(--gray-200);
+            border-bottom: 1px solid var(--gray-200);
         }
         
-        .how-it-works h2 {
+        .section-header {
             text-align: center;
-            font-size: 24px;
+            margin-bottom: 48px;
+        }
+        
+        .section-header h2 {
+            font-size: 28px;
             font-weight: 700;
-            margin-bottom: 40px;
+            color: var(--navy);
+            margin-bottom: 8px;
+        }
+        
+        .section-header p {
+            color: var(--slate);
+            font-size: 16px;
         }
         
         .steps {
-            max-width: 900px;
-            margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 32px;
+            max-width: 900px;
+            margin: 0 auto 40px;
         }
         
         .step {
             text-align: center;
+            padding: 24px;
         }
         
         .step-number {
             width: 48px;
             height: 48px;
-            background: var(--color-amber);
-            color: white;
+            background: var(--amber);
+            color: var(--white);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -235,59 +201,70 @@
         }
         
         .step h3 {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 600;
+            color: var(--navy);
             margin-bottom: 8px;
         }
         
         .step p {
+            color: var(--slate);
             font-size: 14px;
-            color: var(--color-slate);
         }
         
         .free-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--color-amber-light), var(--color-amber));
-            color: white;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 13px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--amber) 0%, var(--amber-dark) 100%);
+            color: var(--white);
+            padding: 12px 24px;
+            border-radius: 50px;
             font-weight: 600;
-            margin-top: 24px;
+            font-size: 14px;
+            margin: 0 auto;
         }
         
+        .free-badge-wrapper {
+            text-align: center;
+        }
+
         /* Lessons Carousel */
         .lessons-section {
-            padding: 60px 0;
+            padding: 80px 0;
             overflow: hidden;
+            background: var(--white);
         }
         
         .lessons-header {
             text-align: center;
             padding: 0 24px;
-            margin-bottom: 32px;
+            margin-bottom: 40px;
         }
         
         .lessons-header h2 {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: 700;
+            color: var(--navy);
             margin-bottom: 8px;
         }
         
         .lessons-header p {
-            color: var(--color-slate);
-            font-size: 15px;
+            color: var(--slate);
+            font-size: 16px;
+        }
+        
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
         }
         
         .carousel-track {
             display: flex;
             gap: 20px;
-            animation: scroll 80s linear infinite;
+            animation: scroll 90s linear infinite;
             width: max-content;
-        }
-        
-        .carousel-track:hover {
-            animation-play-state: paused;
         }
         
         @keyframes scroll {
@@ -295,32 +272,35 @@
             100% { transform: translateX(-50%); }
         }
         
+        .carousel-track:hover {
+            animation-play-state: paused;
+        }
+        
         .lesson-card {
             flex-shrink: 0;
-            width: 320px;
-            background: var(--color-bg);
-            border: 1px solid var(--color-border);
+            width: 300px;
+            background: var(--white);
+            border: 1px solid var(--gray-200);
             border-radius: 12px;
             padding: 20px;
             transition: all 0.2s;
         }
         
         .lesson-card:hover {
-            border-color: var(--color-amber);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-color: var(--amber);
+            box-shadow: 0 4px 12px rgba(217, 119, 6, 0.1);
         }
         
         .card-header {
             display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            margin-bottom: 12px;
+            gap: 14px;
+            margin-bottom: 16px;
         }
         
         .card-icon {
             width: 44px;
             height: 44px;
-            background: var(--color-bg-soft);
+            background: var(--amber-bg);
             border-radius: 10px;
             display: flex;
             align-items: center;
@@ -335,39 +315,36 @@
         }
         
         .card-subject {
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--color-amber-dark);
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--amber);
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            margin-bottom: 2px;
         }
         
         .card-topic {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
-            color: var(--color-ink);
+            color: var(--navy);
             line-height: 1.3;
-            margin-top: 2px;
         }
         
         .card-meta {
             display: flex;
+            gap: 12px;
             flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 12px;
-            padding-top: 12px;
-            border-top: 1px solid var(--color-border);
+            margin-bottom: 14px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--gray-100);
         }
         
         .meta-item {
-            display: inline-flex;
+            display: flex;
             align-items: center;
             gap: 4px;
             font-size: 12px;
-            color: var(--color-slate);
-            background: var(--color-bg-soft);
-            padding: 4px 8px;
-            border-radius: 6px;
+            color: var(--slate);
         }
         
         .meta-item .flag {
@@ -376,102 +353,92 @@
         
         .card-footer {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            margin-top: 12px;
-            padding-top: 12px;
-            border-top: 1px solid var(--color-border);
+            align-items: center;
         }
         
         .card-author {
             font-size: 12px;
-            color: var(--color-muted);
+            color: var(--slate);
         }
         
         .card-type {
             font-size: 11px;
             font-weight: 600;
-            color: var(--color-amber-dark);
-            background: rgba(217, 119, 6, 0.1);
-            padding: 3px 8px;
+            color: var(--amber-dark);
+            background: var(--amber-bg);
+            padding: 4px 10px;
             border-radius: 4px;
         }
-        
+
         /* Footer */
         footer {
-            background: var(--color-ink);
-            color: white;
+            background: var(--navy);
+            color: var(--white);
             padding: 48px 24px 32px;
         }
         
         .footer-inner {
-            max-width: 1000px;
+            max-width: 900px;
             margin: 0 auto;
-        }
-        
-        .footer-top {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
             text-align: center;
-            padding-bottom: 32px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
         
         .footer-logo {
             height: 28px;
-            filter: brightness(0) invert(1);
+            margin-bottom: 12px;
         }
         
         .footer-tagline {
-            color: rgba(255,255,255,0.7);
+            color: var(--slate);
             font-size: 14px;
+            margin-bottom: 24px;
         }
         
         .footer-links {
             display: flex;
+            justify-content: center;
             gap: 24px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
         }
         
         .footer-links a {
-            color: rgba(255,255,255,0.7);
+            color: var(--slate);
             text-decoration: none;
             font-size: 14px;
             transition: color 0.2s;
         }
         
         .footer-links a:hover {
-            color: white;
-        }
-        
-        .footer-bottom {
-            padding-top: 24px;
-            text-align: center;
+            color: var(--amber);
         }
         
         .footer-disclaimer {
             font-size: 12px;
-            color: rgba(255,255,255,0.5);
-            max-width: 700px;
-            margin: 0 auto 16px;
-            line-height: 1.7;
+            color: #475569;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto 20px;
+            padding: 16px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
         }
         
         .footer-credit {
             font-size: 12px;
-            color: rgba(255,255,255,0.4);
+            color: var(--slate);
         }
         
         .footer-credit a {
-            color: var(--color-amber-light);
+            color: var(--amber);
             text-decoration: none;
         }
-        
-        /* Mobile adjustments */
+
+        /* Mobile */
         @media (max-width: 640px) {
             .hero {
-                padding: 48px 20px 40px;
+                padding: 60px 20px 40px;
             }
             
             .hero h1 {
@@ -493,18 +460,12 @@
                 justify-content: center;
             }
             
-            .steps {
-                grid-template-columns: 1fr;
-                gap: 24px;
-            }
-            
             .lesson-card {
                 width: 280px;
             }
             
-            .footer-links {
-                flex-wrap: wrap;
-                justify-content: center;
+            .steps {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -513,62 +474,66 @@
     <!-- Header -->
     <header>
         <div class="header-inner">
-            <img src="logo.svg" alt="Tooley" class="logo">
-            <a href="https://t.me/TooleyAppBot" class="header-cta">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
-                Open Tooley
-            </a>
+            <svg class="logo" viewBox="0 0 975 375" xmlns="http://www.w3.org/2000/svg">
+                <g fill="#d97706">
+                    <path d="M87.8 289.8H55.6V149.2H22.7v-27.1h32.9v-52.5h32.2v52.5H120.8v27.1H87.8z"/>
+                    <path d="M136.9 205.8c0-17.4 3.8-32.7 11.3-45.8 7.5-13.1 18-23.5 31.2-31 13.3-7.6 28.3-11.3 45-11.3s31.6 3.8 44.8 11.3c13.1 7.6 23.5 17.9 31 31 7.6 13.1 11.4 28.4 11.4 45.8 0 17.2-3.8 32.4-11.4 45.6-7.5 13.3-17.9 23.7-31 31.2-13.2 7.5-28.1 11.3-44.8 11.3s-31.7-3.8-45-11.3c-13.2-7.5-23.7-17.9-31.2-31.2-7.5-13.2-11.3-28.4-11.3-45.6zm32.6 0c0 17.4 5.1 31.6 15.3 42.7 10.2 11.1 23.4 16.6 39.6 16.6 10.8 0 20.3-2.5 28.5-7.5 8.2-5 14.7-12 19.4-20.9 4.7-8.9 7-19.2 7-30.9s-2.3-22-7-30.9c-4.7-8.9-11.2-15.9-19.4-20.9-8.2-5-17.7-7.5-28.5-7.5-16.2 0-29.4 5.5-39.6 16.5-10.2 10.9-15.3 25.2-15.3 42.8z"/>
+                    <path d="M336.2 205.8c0-17.4 3.8-32.7 11.3-45.8 7.5-13.1 18-23.5 31.2-31 13.3-7.6 28.3-11.3 45-11.3s31.6 3.8 44.8 11.3c13.1 7.6 23.5 17.9 31 31 7.6 13.1 11.4 28.4 11.4 45.8 0 17.2-3.8 32.4-11.4 45.6-7.5 13.3-17.9 23.7-31 31.2-13.2 7.5-28.1 11.3-44.8 11.3s-31.7-3.8-45-11.3c-13.2-7.5-23.7-17.9-31.2-31.2-7.5-13.2-11.3-28.4-11.3-45.6zm32.6 0c0 17.4 5.1 31.6 15.3 42.7 10.2 11.1 23.4 16.6 39.6 16.6 10.8 0 20.3-2.5 28.5-7.5 8.2-5 14.7-12 19.4-20.9 4.7-8.9 7-19.2 7-30.9s-2.3-22-7-30.9c-4.7-8.9-11.2-15.9-19.4-20.9-8.2-5-17.7-7.5-28.5-7.5-16.2 0-29.4 5.5-39.6 16.5-10.2 10.9-15.3 25.2-15.3 42.8z"/>
+                    <path d="M579.3 289.8h-32.2V37.3h32.2z"/>
+                    <path d="M699 293.9c-16.5 0-31-3.7-43.4-11.1-12.5-7.4-22.3-17.7-29.3-30.9-7.1-13.2-10.6-28.4-10.6-45.8 0-17.6 3.4-33 10.3-46.3 6.9-13.3 16.5-23.7 28.8-31.2 12.4-7.6 26.7-11.3 42.9-11.3 16 0 29.9 3.4 41.7 10.3 11.8 6.9 21 16.5 27.5 28.8 6.5 12.3 9.8 26.9 9.8 43.6v12h-129.7c1.1 17.6 6.2 31.2 15.3 40.7 9 9.5 21.5 14.2 37.5 14.2 25.6 0 41.3-9.8 47-29.5h30.2c-4.1 18.1-12.9 32-26.4 41.7-13.5 9.7-30.7 14.8-51.6 14.8zm-1.4-149.5c-14 0-25.3 4-34 12-8.7 8-14.1 19.4-16.1 34.3h96.7c0-14-4.2-25.2-12.7-33.6-8.5-8.5-19.8-12.7-33.9-12.7z"/>
+                    <path d="M791.7 365h-21.6v-26.4h21.6c7.8 0 14.7-1.3 20.8-3.9 6.1-2.6 11-9.2 14.9-19.7l5.8-16.1-67.6-176.7h33.9l48.7 135.2 49.7-135.2h33.3L852.4 328c-5.7 14.4-12.9 24.8-21.6 31.2-8.7 6.4-19.4 9.6-32.2 9.6-5.3 0-10.2-.3-14.8-1-4.5-.7-9-1.5-13.3-2.4z"/>
+                </g>
+            </svg>
+            <a href="https://t.me/TooleyAppBot" class="header-cta">Start Free</a>
         </div>
     </header>
 
     <!-- Hero -->
     <section class="hero">
-        <h1>AI lesson plans for teachers in low-resource schools</h1>
-        <p>Generate customized, curriculum-aligned lesson plans in seconds. Subject, topic, age group, duration—you choose, AI creates.</p>
-        
-        <div class="hero-buttons">
-            <a href="https://t.me/TooleyAppBot" class="btn btn-primary">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
-                Start on Telegram
-            </a>
-            <a href="https://web.telegram.org/k/#@TooleyAppBot" class="btn btn-secondary" target="_blank">
-                Open in Browser
-            </a>
-        </div>
-        
-        <div class="qr-section">
-            <div class="qr-wrapper">
-                <img src="tooley-qr-clean.png" alt="Scan to open Tooley" class="qr-code">
-                <div class="qr-text">
-                    <p>Scan with your phone camera</p>
-                    <code>@TooleyAppBot</code>
-                </div>
+        <div class="hero-content">
+            <h1>AI lesson plans for teachers in <span>low-resource schools</span></h1>
+            <p>Create structured, curriculum-aligned lesson plans in minutes. No materials required. Always free.</p>
+            <div class="hero-buttons">
+                <a href="https://t.me/TooleyAppBot" class="btn btn-primary">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+                    Open in Telegram App
+                </a>
+                <a href="https://web.telegram.org/k/#@TooleyAppBot" class="btn btn-secondary" target="_blank">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2zm0 2v12h16V6H4zm2 2h12v2H6V8zm0 4h8v2H6v-2z"/></svg>
+                    Open in Browser
+                </a>
             </div>
         </div>
     </section>
 
     <!-- How It Works -->
     <section class="how-it-works">
-        <h2>How It Works</h2>
+        <div class="section-header">
+            <h2>How It Works</h2>
+            <p>Create a complete lesson plan in under 2 minutes</p>
+        </div>
         <div class="steps">
             <div class="step">
                 <div class="step-number">1</div>
-                <h3>Open Tooley on Telegram</h3>
-                <p>No downloads or sign-ups needed. Works on any device with Telegram.</p>
+                <h3>Choose Your Subject</h3>
+                <p>Select from Mathematics, Science, Reading, Language, Social Studies, Art, or any custom topic</p>
             </div>
             <div class="step">
                 <div class="step-number">2</div>
-                <h3>Tell it what you need</h3>
-                <p>Subject, topic, age range, duration. Type or use voice messages.</p>
+                <h3>Set Parameters</h3>
+                <p>Specify age group, duration, available materials, and teaching style</p>
             </div>
             <div class="step">
                 <div class="step-number">3</div>
-                <h3>Get your lesson plan</h3>
-                <p>Receive a complete lesson in chat, PDF, or HTML—ready to teach.</p>
+                <h3>Get Your Plan</h3>
+                <p>Receive a complete lesson plan with objectives, activities, and assessments</p>
             </div>
         </div>
-        <div style="text-align: center;">
-            <span class="free-badge">✨ Always Free for Teachers</span>
+        <div class="free-badge-wrapper">
+            <div class="free-badge">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                Always Free for Teachers
+            </div>
         </div>
     </section>
 
@@ -578,173 +543,85 @@
             <h2>Lessons Created by Teachers</h2>
             <p>See what educators around the world are building with Tooley</p>
         </div>
-        <div class="carousel-track" id="carousel">
-            <!-- Cards populated by JS -->
+        <div class="carousel-container">
+            <div class="carousel-track" id="carousel"></div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
         <div class="footer-inner">
-            <div class="footer-top">
-                <img src="logo.svg" alt="Tooley" class="footer-logo">
-                <p class="footer-tagline">Free AI lesson plans for teachers worldwide</p>
-                <div class="footer-links">
-                    <a href="https://t.me/TooleyAppBot">Open Tooley</a>
-                    <a href="mailto:hello@tooley.app">Contact</a>
-                </div>
+            <svg class="footer-logo" viewBox="0 0 975 375" xmlns="http://www.w3.org/2000/svg">
+                <g fill="#d97706">
+                    <path d="M87.8 289.8H55.6V149.2H22.7v-27.1h32.9v-52.5h32.2v52.5H120.8v27.1H87.8z"/>
+                    <path d="M136.9 205.8c0-17.4 3.8-32.7 11.3-45.8 7.5-13.1 18-23.5 31.2-31 13.3-7.6 28.3-11.3 45-11.3s31.6 3.8 44.8 11.3c13.1 7.6 23.5 17.9 31 31 7.6 13.1 11.4 28.4 11.4 45.8 0 17.2-3.8 32.4-11.4 45.6-7.5 13.3-17.9 23.7-31 31.2-13.2 7.5-28.1 11.3-44.8 11.3s-31.7-3.8-45-11.3c-13.2-7.5-23.7-17.9-31.2-31.2-7.5-13.2-11.3-28.4-11.3-45.6zm32.6 0c0 17.4 5.1 31.6 15.3 42.7 10.2 11.1 23.4 16.6 39.6 16.6 10.8 0 20.3-2.5 28.5-7.5 8.2-5 14.7-12 19.4-20.9 4.7-8.9 7-19.2 7-30.9s-2.3-22-7-30.9c-4.7-8.9-11.2-15.9-19.4-20.9-8.2-5-17.7-7.5-28.5-7.5-16.2 0-29.4 5.5-39.6 16.5-10.2 10.9-15.3 25.2-15.3 42.8z"/>
+                    <path d="M336.2 205.8c0-17.4 3.8-32.7 11.3-45.8 7.5-13.1 18-23.5 31.2-31 13.3-7.6 28.3-11.3 45-11.3s31.6 3.8 44.8 11.3c13.1 7.6 23.5 17.9 31 31 7.6 13.1 11.4 28.4 11.4 45.8 0 17.2-3.8 32.4-11.4 45.6-7.5 13.3-17.9 23.7-31 31.2-13.2 7.5-28.1 11.3-44.8 11.3s-31.7-3.8-45-11.3c-13.2-7.5-23.7-17.9-31.2-31.2-7.5-13.2-11.3-28.4-11.3-45.6zm32.6 0c0 17.4 5.1 31.6 15.3 42.7 10.2 11.1 23.4 16.6 39.6 16.6 10.8 0 20.3-2.5 28.5-7.5 8.2-5 14.7-12 19.4-20.9 4.7-8.9 7-19.2 7-30.9s-2.3-22-7-30.9c-4.7-8.9-11.2-15.9-19.4-20.9-8.2-5-17.7-7.5-28.5-7.5-16.2 0-29.4 5.5-39.6 16.5-10.2 10.9-15.3 25.2-15.3 42.8z"/>
+                    <path d="M579.3 289.8h-32.2V37.3h32.2z"/>
+                    <path d="M699 293.9c-16.5 0-31-3.7-43.4-11.1-12.5-7.4-22.3-17.7-29.3-30.9-7.1-13.2-10.6-28.4-10.6-45.8 0-17.6 3.4-33 10.3-46.3 6.9-13.3 16.5-23.7 28.8-31.2 12.4-7.6 26.7-11.3 42.9-11.3 16 0 29.9 3.4 41.7 10.3 11.8 6.9 21 16.5 27.5 28.8 6.5 12.3 9.8 26.9 9.8 43.6v12h-129.7c1.1 17.6 6.2 31.2 15.3 40.7 9 9.5 21.5 14.2 37.5 14.2 25.6 0 41.3-9.8 47-29.5h30.2c-4.1 18.1-12.9 32-26.4 41.7-13.5 9.7-30.7 14.8-51.6 14.8zm-1.4-149.5c-14 0-25.3 4-34 12-8.7 8-14.1 19.4-16.1 34.3h96.7c0-14-4.2-25.2-12.7-33.6-8.5-8.5-19.8-12.7-33.9-12.7z"/>
+                    <path d="M791.7 365h-21.6v-26.4h21.6c7.8 0 14.7-1.3 20.8-3.9 6.1-2.6 11-9.2 14.9-19.7l5.8-16.1-67.6-176.7h33.9l48.7 135.2 49.7-135.2h33.3L852.4 328c-5.7 14.4-12.9 24.8-21.6 31.2-8.7 6.4-19.4 9.6-32.2 9.6-5.3 0-10.2-.3-14.8-1-4.5-.7-9-1.5-13.3-2.4z"/>
+                </g>
+            </svg>
+            <p class="footer-tagline">AI-powered lesson plans for teachers worldwide</p>
+            <div class="footer-links">
+                <a href="https://t.me/TooleyAppBot">Telegram Bot</a>
+                <a href="https://web.telegram.org/k/#@TooleyAppBot">Web Version</a>
+                <a href="mailto:hello@tooley.app">Contact</a>
             </div>
-            <div class="footer-bottom">
-                <p class="footer-disclaimer">
-                    Tooley generates lesson plans using AI. Content should be reviewed by teachers before classroom use. 
-                    Not affiliated with any government education authority. Designed for educators in low-resource schools.
-                </p>
-                <p class="footer-credit">
-                    Inspired by <a href="https://www.jamestooley.org/" target="_blank">Prof. James Tooley</a>'s work on low-cost education. 
-                    © 2026 Tooley
-                </p>
+            <div class="footer-disclaimer">
+                Tooley generates lesson plans using AI. Teachers should review and adapt all content for their specific classroom needs and local curriculum requirements.
             </div>
+            <p class="footer-credit">
+                Named after <a href="https://www.jamesTooley.com" target="_blank">Prof. James Tooley</a>, champion of low-cost education
+            </p>
         </div>
     </footer>
 
     <script>
-        // Lesson data - will be fetched from lessons.json
-        const defaultLessons = [
-            {
-                subject: "Mathematics",
-                icon: "📐",
-                topic: "Introduction to Fractions",
-                country: "India",
-                flag: "🇮🇳",
-                ages: "8-10",
-                duration: "45 min",
-                type: "Interactive",
-                author: "Teacher Priya"
-            },
-            {
-                subject: "Science",
-                icon: "🔬",
-                topic: "The Water Cycle",
-                country: "Nigeria",
-                flag: "🇳🇬",
-                ages: "10-12",
-                duration: "40 min",
-                type: "Hands-on",
-                author: "Teacher Chidi"
-            },
-            {
-                subject: "Language",
-                icon: "📖",
-                topic: "Creative Story Writing",
-                country: "Kenya",
-                flag: "🇰🇪",
-                ages: "9-11",
-                duration: "50 min",
-                type: "Workshop",
-                author: "Teacher Amina"
-            },
-            {
-                subject: "Social Studies",
-                icon: "🌍",
-                topic: "Our Local Community",
-                country: "Ghana",
-                flag: "🇬🇭",
-                ages: "7-9",
-                duration: "35 min",
-                type: "Discussion",
-                author: "Teacher Kofi"
-            },
-            {
-                subject: "Reading",
-                icon: "📚",
-                topic: "Phonics Practice",
-                country: "Pakistan",
-                flag: "🇵🇰",
-                ages: "5-7",
-                duration: "30 min",
-                type: "Activity",
-                author: "Teacher Fatima"
-            },
-            {
-                subject: "Art",
-                icon: "🎨",
-                topic: "Nature Drawing",
-                country: "Philippines",
-                flag: "🇵🇭",
-                ages: "8-10",
-                duration: "45 min",
-                type: "Creative",
-                author: "Teacher Maria"
-            },
-            {
-                subject: "Mathematics",
-                icon: "📐",
-                topic: "Basic Multiplication",
-                country: "Uganda",
-                flag: "🇺🇬",
-                ages: "7-9",
-                duration: "40 min",
-                type: "Practice",
-                author: "Teacher Joseph"
-            },
-            {
-                subject: "Science",
-                icon: "🔬",
-                topic: "Plant Life Cycle",
-                country: "Tanzania",
-                flag: "🇹🇿",
-                ages: "9-11",
-                duration: "45 min",
-                type: "Experiment",
-                author: "Teacher Grace"
-            }
+        // Lesson data with all required fields
+        const lessons = [
+            { subject: "Science", icon: "🔬", topic: "Phases of the Moon", country: "Uganda", flag: "🇺🇬", ages: "11-13", duration: "45", type: "Interactive", author: "Teacher Sarah" },
+            { subject: "Mathematics", icon: "📐", topic: "Fractions: Fair Sharing", country: "Kenya", flag: "🇰🇪", ages: "8-10", duration: "45", type: "Hands-on", author: "Teacher James" },
+            { subject: "Science", icon: "🔬", topic: "The Water Cycle", country: "India", flag: "🇮🇳", ages: "10-12", duration: "40", type: "Experiment", author: "Teacher Priya" },
+            { subject: "Language", icon: "✏️", topic: "Creative Story Writing", country: "Nigeria", flag: "🇳🇬", ages: "9-11", duration: "50", type: "Workshop", author: "Teacher Chioma" },
+            { subject: "Social Studies", icon: "🌍", topic: "Community Helpers", country: "South Africa", flag: "🇿🇦", ages: "5-7", duration: "30", type: "Discussion", author: "Teacher Thabo" },
+            { subject: "Reading", icon: "📚", topic: "Phonics Practice", country: "Pakistan", flag: "🇵🇰", ages: "5-7", duration: "30", type: "Activity", author: "Teacher Fatima" },
+            { subject: "Art", icon: "🎨", topic: "Nature Drawing", country: "Philippines", flag: "🇵🇭", ages: "8-10", duration: "45", type: "Creative", author: "Teacher Maria" },
+            { subject: "Mathematics", icon: "📐", topic: "Basic Multiplication", country: "Tanzania", flag: "🇹🇿", ages: "7-9", duration: "40", type: "Practice", author: "Teacher Joseph" },
+            { subject: "Science", icon: "🔬", topic: "Types of Rocks", country: "Ghana", flag: "🇬🇭", ages: "7-9", duration: "30", type: "Hands-on", author: "Teacher Kofi" },
+            { subject: "Language", icon: "✏️", topic: "Letter Writing", country: "Bangladesh", flag: "🇧🇩", ages: "10-12", duration: "35", type: "Writing", author: "Teacher Rahim" }
         ];
 
         function createCard(lesson) {
             return `
                 <div class="lesson-card">
                     <div class="card-header">
-                        <div class="card-icon">${lesson.icon}</div>
+                        <div class="card-icon">${lesson.icon || '📝'}</div>
                         <div class="card-title-area">
-                            <div class="card-subject">${lesson.subject}</div>
-                            <div class="card-topic">${lesson.topic}</div>
+                            <div class="card-subject">${lesson.subject || 'General'}</div>
+                            <div class="card-topic">${lesson.topic || 'Lesson'}</div>
                         </div>
                     </div>
                     <div class="card-meta">
-                        <span class="meta-item"><span class="flag">${lesson.flag}</span> ${lesson.country}</span>
-                        <span class="meta-item">👤 ${lesson.ages}</span>
-                        <span class="meta-item">⏱ ${lesson.duration}</span>
+                        <span class="meta-item"><span class="flag">${lesson.flag || '🌍'}</span> ${lesson.country || 'Global'}</span>
+                        <span class="meta-item">👤 ${lesson.ages || 'All ages'}</span>
+                        <span class="meta-item">⏱ ${lesson.duration || '30'} min</span>
                     </div>
                     <div class="card-footer">
-                        <span class="card-author">by ${lesson.author}</span>
-                        <span class="card-type">${lesson.type}</span>
+                        <span class="card-author">by ${lesson.author || 'Teacher'}</span>
+                        <span class="card-type">${lesson.type || 'Lesson'}</span>
                     </div>
                 </div>
             `;
         }
 
-        async function loadLessons() {
-            let lessons = defaultLessons;
-            
-            try {
-                const response = await fetch('lessons.json');
-                if (response.ok) {
-                    const data = await response.json();
-                    if (data.lessons && data.lessons.length > 0) {
-                        lessons = data.lessons;
-                    }
-                }
-            } catch (e) {
-                console.log('Using default lessons');
-            }
-
+        function loadCarousel() {
             const carousel = document.getElementById('carousel');
             // Duplicate for infinite scroll
             const allCards = [...lessons, ...lessons].map(createCard).join('');
             carousel.innerHTML = allCards;
         }
 
-        loadLessons();
+        loadCarousel();
     </script>
 </body>
 </html>
