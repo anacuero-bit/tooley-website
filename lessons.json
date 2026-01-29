@@ -1,6 +1,17 @@
 {
-  "lastUpdated": "2026-01-29T12:44:03.350943Z",
+  "lastUpdated": "2026-01-29T13:16:22.350000Z",
   "lessons": [
+    {
+      "id": "les_83e3d44e",
+      "subject": "Mathematics",
+      "topic": "Subtraction",
+      "ages": "9-11",
+      "duration": "30",
+      "country": "Global",
+      "teacher_name": "Sophie",
+      "public": true,
+      "created_at": "2026-01-29T13:16:22.349992Z"
+    },
     {
       "id": "les_152d3bf4",
       "subject": "Language",
