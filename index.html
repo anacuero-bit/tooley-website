@@ -56,14 +56,15 @@
             width: auto;
         }
         
-        /* Donate CTA in header */
+        /* Donate CTA in header - white with amber border */
         .header-cta {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: var(--amber);
-            color: var(--white);
-            padding: 10px 20px;
+            background: var(--white);
+            color: var(--amber-dark);
+            border: 2px solid var(--amber);
+            padding: 8px 18px;
             border-radius: 6px;
             text-decoration: none;
             font-weight: 600;
@@ -72,7 +73,8 @@
         }
         
         .header-cta:hover {
-            background: var(--amber-dark);
+            background: var(--amber);
+            color: var(--white);
             transform: translateY(-1px);
         }
         
@@ -112,9 +114,22 @@
         
         .hero-buttons {
             display: flex;
-            gap: 12px;
+            gap: 16px;
             justify-content: center;
             flex-wrap: wrap;
+        }
+        
+        .btn-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .btn-helper {
+            font-size: 11px;
+            color: var(--amber-dark);
+            font-weight: 500;
         }
         
         /* Both buttons same amber color and width */
@@ -368,31 +383,27 @@
             text-align: center;
         }
 
-        /* Why Tooley Section - LAST before footer */
+        /* Why Tooley Section - White bg, centered like other sections */
         .why-tooley {
             padding: 80px 24px;
-            background: var(--navy);
+            background: var(--white);
+            border-top: 1px solid var(--gray-200);
         }
         
         .why-tooley-inner {
-            max-width: 800px;
+            max-width: 700px;
             margin: 0 auto;
-        }
-        
-        .why-tooley-box {
-            background: rgba(255,255,255,0.05);
-            border-left: 4px solid var(--amber);
-            padding: 32px;
-            border-radius: 0 12px 12px 0;
+            text-align: center;
         }
         
         .why-tooley h2 {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: 700;
-            color: var(--white);
-            margin-bottom: 20px;
+            color: var(--navy);
+            margin-bottom: 24px;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 12px;
         }
         
@@ -402,22 +413,42 @@
         
         .why-tooley p {
             font-size: 15px;
-            color: rgba(255,255,255,0.7);
+            color: var(--slate);
             line-height: 1.8;
             margin-bottom: 16px;
         }
         
         .why-tooley p:last-of-type {
-            margin-bottom: 0;
+            margin-bottom: 28px;
         }
         
         .why-tooley a {
-            color: var(--amber);
+            color: var(--amber-dark);
             text-decoration: none;
         }
         
         .why-tooley a:hover {
             text-decoration: underline;
+        }
+        
+        .why-tooley .donate-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--amber);
+            color: var(--white);
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.2s;
+        }
+        
+        .why-tooley .donate-cta:hover {
+            background: var(--amber-dark);
+            transform: translateY(-1px);
+            text-decoration: none;
         }
 
         /* Footer - Clean alignment */
@@ -502,7 +533,7 @@
         }
         
         .footer-heart-line .heart {
-            color: var(--amber-dark);
+            color: var(--amber);
         }
         
         /* Disclaimer */
@@ -633,9 +664,6 @@
                 justify-content: center;
             }
             
-            .why-tooley-box {
-                padding: 24px;
-            }
         }
     </style>
 </head>
@@ -666,14 +694,20 @@
             <h1>AI lesson plans for every teacher</h1>
             <p>Create structured, curriculum-aligned lesson plans in minutes. No materials required. Always free.</p>
             <div class="hero-buttons">
-                <a href="https://t.me/TooleyAppBot" class="btn">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
-                    Open in Telegram
-                </a>
-                <a href="https://web.telegram.org/k/#@TooleyAppBot" class="btn" target="_blank">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
-                    Open in Browser
-                </a>
+                <div class="btn-wrapper">
+                    <a href="https://t.me/TooleyAppBot" class="btn">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+                        Open in Telegram
+                    </a>
+                    <span class="btn-helper">Best for mobile</span>
+                </div>
+                <div class="btn-wrapper">
+                    <a href="https://web.telegram.org/k/#@TooleyAppBot" class="btn" target="_blank">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                        Open in Browser
+                    </a>
+                    <span class="btn-helper">Best for desktop</span>
+                </div>
             </div>
         </div>
     </section>
@@ -720,14 +754,16 @@
         </div>
     </section>
 
-    <!-- Why Tooley Section - LAST before footer -->
+    <!-- Why Tooley Section - Clean white design -->
     <section class="why-tooley">
         <div class="why-tooley-inner">
-            <div class="why-tooley-box">
-                <h2><span>🎓</span> Why "Tooley"?</h2>
-                <p>Named after <a href="https://www.jamestooley.com" target="_blank">Professor James Tooley</a>, whose groundbreaking research revealed that affordable private schools in developing countries often outperform government alternatives—proving that quality education doesn't require massive budgets.</p>
-                <p>His work in "The Beautiful Tree" showed that dedicated teachers with limited resources can achieve remarkable outcomes. Tooley exists to amplify that dedication: giving every teacher access to AI-powered lesson planning, regardless of their school's resources.</p>
-            </div>
+            <h2><span>🎓</span> Why "Tooley"?</h2>
+            <p>Named after <a href="https://www.jamestooley.com" target="_blank">Professor James Tooley</a>, whose groundbreaking research revealed that affordable private schools in developing countries often outperform government alternatives—proving that quality education doesn't require massive budgets.</p>
+            <p>His work in "The Beautiful Tree" showed that dedicated teachers with limited resources can achieve remarkable outcomes. Tooley exists to amplify that dedication: giving every teacher access to AI-powered lesson planning, regardless of their school's resources.</p>
+            <a href="https://buymeacoffee.com/tooleyapp" class="donate-cta" target="_blank">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                Support Tooley
+            </a>
         </div>
     </section>
 
@@ -740,7 +776,7 @@
                     <h4>Get Started</h4>
                     <a href="https://t.me/TooleyAppBot">Telegram Bot</a>
                     <a href="https://web.telegram.org/k/#@TooleyAppBot">Web Version</a>
-                    <a href="mailto:hello@tooley.app">Contact Us</a>
+                    <a href="/cdn-cgi/l/email-protection#eb838e878784ab9f8484878e92c58a9b9b">Contact Us</a>
                 </div>
                 <div class="footer-col">
                     <h4>Resources</h4>
@@ -807,12 +843,12 @@
             
             <!-- Design Credit -->
             <div class="footer-credit">
-                Built with love by <a href="https://yellow.digital" target="_blank">yellow.digital</a>
+                Developed in Dubai by <a href="https://yellow.digital" target="_blank">yellow.digital</a>
             </div>
         </div>
     </footer>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Country to flag mapping - COMPREHENSIVE
         const FLAGS = {
             'Uganda': '🇺🇬', 'Kenya': '🇰🇪', 'India': '🇮🇳', 'Nigeria': '🇳🇬',
@@ -917,10 +953,4 @@
                     const combined = [...data.lessons, ...DEFAULT_LESSONS];
                     renderCarousel(combined);
                 } else {
-                    renderCarousel(DEFAULT_LESSONS);
-                }
-            })
-            .catch(() => renderCarousel(DEFAULT_LESSONS));
-    </script>
-</body>
-</html>
+                    renderCa
