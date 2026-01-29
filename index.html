@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tooley - AI Lesson Plans for Teachers</title>
-    <meta name="description" content="Free AI-powered lesson plan generator for teachers in low-resource schools. Create structured, curriculum-aligned lesson plans in minutes.">
+    <meta name="description" content="Free AI-powered lesson plan generator for teachers. Create structured, curriculum-aligned lesson plans in minutes. Always free.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -56,19 +56,34 @@
             width: auto;
         }
         
+        .header-center {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: var(--slate);
+        }
+        
+        .header-center .heart {
+            color: #ef4444;
+            font-size: 14px;
+        }
+        
         .header-cta {
-            background: var(--amber);
-            color: var(--white);
+            background: var(--white);
+            color: var(--amber);
             padding: 8px 20px;
             border-radius: 6px;
+            border: 2px solid var(--amber);
             text-decoration: none;
             font-weight: 600;
             font-size: 14px;
-            transition: background 0.2s;
+            transition: all 0.2s;
         }
         
         .header-cta:hover {
-            background: var(--amber-dark);
+            background: var(--amber);
+            color: var(--white);
         }
 
         /* Hero */
@@ -114,38 +129,43 @@
         .btn {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             padding: 14px 28px;
             border-radius: 8px;
             font-weight: 600;
             font-size: 15px;
             text-decoration: none;
             transition: all 0.2s;
+            border: 2px solid;
         }
         
         .btn-primary {
-            background: var(--amber);
-            color: var(--white);
+            background: var(--white);
+            color: var(--amber);
+            border-color: var(--amber);
         }
         
         .btn-primary:hover {
-            background: var(--amber-dark);
+            background: var(--amber);
+            color: var(--white);
             transform: translateY(-1px);
         }
         
         .btn-secondary {
-            background: var(--navy);
-            color: var(--white);
+            background: var(--white);
+            color: var(--navy);
+            border-color: var(--navy);
         }
         
         .btn-secondary:hover {
-            background: var(--navy-light);
+            background: var(--navy);
+            color: var(--white);
             transform: translateY(-1px);
         }
         
         .btn svg {
-            width: 18px;
-            height: 18px;
+            width: 22px;
+            height: 22px;
         }
 
         /* How It Works */
@@ -189,8 +209,9 @@
         .step-number {
             width: 48px;
             height: 48px;
-            background: var(--amber);
-            color: var(--white);
+            background: var(--white);
+            color: var(--amber);
+            border: 2px solid var(--amber);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -216,8 +237,9 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: linear-gradient(135deg, var(--amber) 0%, var(--amber-dark) 100%);
-            color: var(--white);
+            background: var(--white);
+            color: var(--amber);
+            border: 2px solid var(--amber);
             padding: 12px 24px;
             border-radius: 50px;
             font-weight: 600;
@@ -371,71 +393,249 @@
             border-radius: 4px;
         }
 
-        /* Footer */
+        /* Footer - Expanded */
         footer {
             background: var(--navy);
             color: var(--white);
+            padding: 0;
+        }
+        
+        /* Heart Banner */
+        .footer-heart-banner {
+            background: var(--amber);
+            padding: 16px 24px;
+            text-align: center;
+        }
+        
+        .footer-heart-banner p {
+            color: var(--white);
+            font-size: 15px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .footer-heart-banner .heart {
+            font-size: 18px;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+        
+        /* Main Footer Content */
+        .footer-main {
             padding: 48px 24px 32px;
         }
         
         .footer-inner {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
-            text-align: center;
         }
         
-        .footer-logo {
-            height: 28px;
+        .footer-top {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 40px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 32px;
+        }
+        
+        .footer-col h4 {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--amber);
+            margin-bottom: 16px;
+        }
+        
+        .footer-col p {
+            font-size: 14px;
+            color: var(--slate);
+            line-height: 1.7;
+        }
+        
+        .footer-col a {
+            color: var(--slate);
+            text-decoration: none;
+            font-size: 14px;
+            display: block;
+            margin-bottom: 8px;
+            transition: color 0.2s;
+        }
+        
+        .footer-col a:hover {
+            color: var(--amber);
+        }
+        
+        /* Manifesto Section */
+        .footer-manifesto {
+            background: rgba(255,255,255,0.03);
+            padding: 24px;
+            border-radius: 8px;
+            margin-bottom: 32px;
+            border-left: 3px solid var(--amber);
+        }
+        
+        .footer-manifesto h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--white);
             margin-bottom: 12px;
         }
         
-        .footer-tagline {
+        .footer-manifesto p {
+            font-size: 13px;
             color: var(--slate);
-            font-size: 14px;
-            margin-bottom: 24px;
+            line-height: 1.7;
+            margin-bottom: 12px;
         }
         
-        .footer-links {
+        .footer-manifesto p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .footer-manifesto a {
+            color: var(--amber);
+            text-decoration: none;
+        }
+        
+        .footer-manifesto a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Open Source Badges */
+        .footer-badges {
             display: flex;
+            align-items: center;
             justify-content: center;
             gap: 24px;
+            padding: 24px 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
             margin-bottom: 24px;
             flex-wrap: wrap;
         }
         
-        .footer-links a {
+        .badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 6px;
+            font-size: 12px;
+            color: var(--slate);
+        }
+        
+        .badge svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+        
+        .badge-cc {
+            color: #f59e0b;
+        }
+        
+        .badge-osi {
+            color: #3b82f6;
+        }
+        
+        .badge-free {
+            color: #10b981;
+        }
+        
+        /* Disclaimer */
+        .footer-disclaimer {
+            font-size: 11px;
+            color: #475569;
+            line-height: 1.6;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 24px;
+            padding: 16px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 6px;
+        }
+        
+        /* Footer Bottom */
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        
+        .footer-logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .footer-logo {
+            height: 24px;
+        }
+        
+        .footer-logo-text {
+            font-size: 12px;
+            color: var(--slate);
+        }
+        
+        .footer-links-bottom {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .footer-links-bottom a {
             color: var(--slate);
             text-decoration: none;
-            font-size: 14px;
+            font-size: 12px;
             transition: color 0.2s;
         }
         
-        .footer-links a:hover {
+        .footer-links-bottom a:hover {
             color: var(--amber);
-        }
-        
-        .footer-disclaimer {
-            font-size: 12px;
-            color: #475569;
-            line-height: 1.6;
-            max-width: 600px;
-            margin: 0 auto 20px;
-            padding: 16px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 8px;
         }
         
         .footer-credit {
-            font-size: 12px;
-            color: var(--slate);
+            font-size: 11px;
+            color: #475569;
+            text-align: center;
+            width: 100%;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            margin-top: 16px;
         }
         
         .footer-credit a {
-            color: var(--amber);
+            color: var(--slate);
             text-decoration: none;
+        }
+        
+        .footer-credit a:hover {
+            color: var(--amber);
         }
 
         /* Mobile */
+        @media (max-width: 768px) {
+            .header-center {
+                display: none;
+            }
+            
+            .footer-top {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+        }
+        
         @media (max-width: 640px) {
             .hero {
                 padding: 60px 20px 40px;
@@ -467,6 +667,25 @@
             .steps {
                 grid-template-columns: 1fr;
             }
+            
+            .footer-badges {
+                gap: 12px;
+            }
+            
+            .badge {
+                font-size: 11px;
+                padding: 6px 10px;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-links-bottom {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
         }
     </style>
 </head>
@@ -484,6 +703,11 @@
                     <path d="M791.7 365h-21.6v-26.4h21.6c7.8 0 14.7-1.3 20.8-3.9 6.1-2.6 11-9.2 14.9-19.7l5.8-16.1-67.6-176.7h33.9l48.7 135.2 49.7-135.2h33.3L852.4 328c-5.7 14.4-12.9 24.8-21.6 31.2-8.7 6.4-19.4 9.6-32.2 9.6-5.3 0-10.2-.3-14.8-1-4.5-.7-9-1.5-13.3-2.4z"/>
                 </g>
             </svg>
+            <div class="header-center">
+                <span>Built with</span>
+                <span class="heart">❤️</span>
+                <span>for teachers worldwide</span>
+            </div>
             <a href="https://t.me/TooleyAppBot" class="header-cta">Start Free</a>
         </div>
     </header>
@@ -491,7 +715,7 @@
     <!-- Hero -->
     <section class="hero">
         <div class="hero-content">
-            <h1>AI lesson plans for teachers in <span>low-resource schools</span></h1>
+            <h1>AI lesson plans for <span>every teacher</span></h1>
             <p>Create structured, curriculum-aligned lesson plans in minutes. No materials required. Always free.</p>
             <div class="hero-buttons">
                 <a href="https://t.me/TooleyAppBot" class="btn btn-primary">
@@ -550,29 +774,91 @@
 
     <!-- Footer -->
     <footer>
-        <div class="footer-inner">
-            <svg class="footer-logo" viewBox="0 0 975 375" xmlns="http://www.w3.org/2000/svg">
-                <g fill="#d97706">
-                    <path d="M87.8 289.8H55.6V149.2H22.7v-27.1h32.9v-52.5h32.2v52.5H120.8v27.1H87.8z"/>
-                    <path d="M136.9 205.8c0-17.4 3.8-32.7 11.3-45.8 7.5-13.1 18-23.5 31.2-31 13.3-7.6 28.3-11.3 45-11.3s31.6 3.8 44.8 11.3c13.1 7.6 23.5 17.9 31 31 7.6 13.1 11.4 28.4 11.4 45.8 0 17.2-3.8 32.4-11.4 45.6-7.5 13.3-17.9 23.7-31 31.2-13.2 7.5-28.1 11.3-44.8 11.3s-31.7-3.8-45-11.3c-13.2-7.5-23.7-17.9-31.2-31.2-7.5-13.2-11.3-28.4-11.3-45.6zm32.6 0c0 17.4 5.1 31.6 15.3 42.7 10.2 11.1 23.4 16.6 39.6 16.6 10.8 0 20.3-2.5 28.5-7.5 8.2-5 14.7-12 19.4-20.9 4.7-8.9 7-19.2 7-30.9s-2.3-22-7-30.9c-4.7-8.9-11.2-15.9-19.4-20.9-8.2-5-17.7-7.5-28.5-7.5-16.2 0-29.4 5.5-39.6 16.5-10.2 10.9-15.3 25.2-15.3 42.8z"/>
-                    <path d="M336.2 205.8c0-17.4 3.8-32.7 11.3-45.8 7.5-13.1 18-23.5 31.2-31 13.3-7.6 28.3-11.3 45-11.3s31.6 3.8 44.8 11.3c13.1 7.6 23.5 17.9 31 31 7.6 13.1 11.4 28.4 11.4 45.8 0 17.2-3.8 32.4-11.4 45.6-7.5 13.3-17.9 23.7-31 31.2-13.2 7.5-28.1 11.3-44.8 11.3s-31.7-3.8-45-11.3c-13.2-7.5-23.7-17.9-31.2-31.2-7.5-13.2-11.3-28.4-11.3-45.6zm32.6 0c0 17.4 5.1 31.6 15.3 42.7 10.2 11.1 23.4 16.6 39.6 16.6 10.8 0 20.3-2.5 28.5-7.5 8.2-5 14.7-12 19.4-20.9 4.7-8.9 7-19.2 7-30.9s-2.3-22-7-30.9c-4.7-8.9-11.2-15.9-19.4-20.9-8.2-5-17.7-7.5-28.5-7.5-16.2 0-29.4 5.5-39.6 16.5-10.2 10.9-15.3 25.2-15.3 42.8z"/>
-                    <path d="M579.3 289.8h-32.2V37.3h32.2z"/>
-                    <path d="M699 293.9c-16.5 0-31-3.7-43.4-11.1-12.5-7.4-22.3-17.7-29.3-30.9-7.1-13.2-10.6-28.4-10.6-45.8 0-17.6 3.4-33 10.3-46.3 6.9-13.3 16.5-23.7 28.8-31.2 12.4-7.6 26.7-11.3 42.9-11.3 16 0 29.9 3.4 41.7 10.3 11.8 6.9 21 16.5 27.5 28.8 6.5 12.3 9.8 26.9 9.8 43.6v12h-129.7c1.1 17.6 6.2 31.2 15.3 40.7 9 9.5 21.5 14.2 37.5 14.2 25.6 0 41.3-9.8 47-29.5h30.2c-4.1 18.1-12.9 32-26.4 41.7-13.5 9.7-30.7 14.8-51.6 14.8zm-1.4-149.5c-14 0-25.3 4-34 12-8.7 8-14.1 19.4-16.1 34.3h96.7c0-14-4.2-25.2-12.7-33.6-8.5-8.5-19.8-12.7-33.9-12.7z"/>
-                    <path d="M791.7 365h-21.6v-26.4h21.6c7.8 0 14.7-1.3 20.8-3.9 6.1-2.6 11-9.2 14.9-19.7l5.8-16.1-67.6-176.7h33.9l48.7 135.2 49.7-135.2h33.3L852.4 328c-5.7 14.4-12.9 24.8-21.6 31.2-8.7 6.4-19.4 9.6-32.2 9.6-5.3 0-10.2-.3-14.8-1-4.5-.7-9-1.5-13.3-2.4z"/>
-                </g>
-            </svg>
-            <p class="footer-tagline">AI-powered lesson plans for teachers worldwide</p>
-            <div class="footer-links">
-                <a href="https://t.me/TooleyAppBot">Telegram Bot</a>
-                <a href="https://web.telegram.org/k/#@TooleyAppBot">Web Version</a>
-                <a href="mailto:hello@tooley.app">Contact</a>
+        <!-- Heart Banner -->
+        <div class="footer-heart-banner">
+            <p>Built with <span class="heart">❤️</span> for teachers worldwide</p>
+        </div>
+        
+        <div class="footer-main">
+            <div class="footer-inner">
+                <!-- Top Grid -->
+                <div class="footer-top">
+                    <div class="footer-col">
+                        <h4>Get Started</h4>
+                        <a href="https://t.me/TooleyAppBot">📱 Telegram App</a>
+                        <a href="https://web.telegram.org/k/#@TooleyAppBot">🌐 Web Version</a>
+                        <a href="mailto:hello@tooley.app">✉️ Contact Us</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Resources</h4>
+                        <a href="#how-it-works">How It Works</a>
+                        <a href="#lessons">Sample Lessons</a>
+                        <a href="https://github.com/tooley-app" target="_blank">GitHub</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Legal</h4>
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                    </div>
+                </div>
+                
+                <!-- Manifesto -->
+                <div class="footer-manifesto">
+                    <h4>🎓 Why "Tooley"?</h4>
+                    <p>Named after <a href="https://www.jamestooley.com" target="_blank">Professor James Tooley</a>, whose groundbreaking research revealed that affordable private schools in developing countries often outperform government alternatives—proving that quality education doesn't require massive budgets.</p>
+                    <p>His work in "The Beautiful Tree" showed that dedicated teachers with limited resources can achieve remarkable outcomes. Tooley exists to amplify that dedication: giving every teacher access to AI-powered lesson planning, regardless of their school's resources.</p>
+                </div>
+                
+                <!-- Open Source Badges -->
+                <div class="footer-badges">
+                    <div class="badge badge-free">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                        100% Free Forever
+                    </div>
+                    <div class="badge badge-cc">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-1.5 15l-4-4 1.4-1.4 2.6 2.6 5.6-5.6 1.4 1.4-7 7z"/></svg>
+                        CC BY-SA 4.0 Content
+                    </div>
+                    <div class="badge badge-osi">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
+                        Open Source
+                    </div>
+                </div>
+                
+                <!-- Disclaimer -->
+                <div class="footer-disclaimer">
+                    <strong>Disclaimer:</strong> Tooley generates lesson plans using artificial intelligence. All content should be reviewed and adapted by teachers for their specific classroom needs, local curriculum requirements, and student abilities. AI-generated content may contain errors or inaccuracies. Teachers retain full responsibility for their classroom instruction.
+                </div>
+                
+                <!-- Bottom -->
+                <div class="footer-bottom">
+                    <div class="footer-logo-area">
+                        <svg class="footer-logo" viewBox="0 0 975 375" xmlns="http://www.w3.org/2000/svg">
+                            <g fill="#d97706">
+                                <path d="M87.8 289.8H55.6V149.2H22.7v-27.1h32.9v-52.5h32.2v52.5H120.8v27.1H87.8z"/>
+                                <path d="M136.9 205.8c0-17.4 3.8-32.7 11.3-45.8 7.5-13.1 18-23.5 31.2-31 13.3-7.6 28.3-11.3 45-11.3s31.6 3.8 44.8 11.3c13.1 7.6 23.5 17.9 31 31 7.6 13.1 11.4 28.4 11.4 45.8 0 17.2-3.8 32.4-11.4 45.6-7.5 13.3-17.9 23.7-31 31.2-13.2 7.5-28.1 11.3-44.8 11.3s-31.7-3.8-45-11.3c-13.2-7.5-23.7-17.9-31.2-31.2-7.5-13.2-11.3-28.4-11.3-45.6z"/>
+                                <path d="M336.2 205.8c0-17.4 3.8-32.7 11.3-45.8 7.5-13.1 18-23.5 31.2-31 13.3-7.6 28.3-11.3 45-11.3s31.6 3.8 44.8 11.3c13.1 7.6 23.5 17.9 31 31 7.6 13.1 11.4 28.4 11.4 45.8 0 17.2-3.8 32.4-11.4 45.6-7.5 13.3-17.9 23.7-31 31.2-13.2 7.5-28.1 11.3-44.8 11.3s-31.7-3.8-45-11.3c-13.2-7.5-23.7-17.9-31.2-31.2-7.5-13.2-11.3-28.4-11.3-45.6z"/>
+                                <path d="M579.3 289.8h-32.2V37.3h32.2z"/>
+                                <path d="M699 293.9c-16.5 0-31-3.7-43.4-11.1-12.5-7.4-22.3-17.7-29.3-30.9-7.1-13.2-10.6-28.4-10.6-45.8 0-17.6 3.4-33 10.3-46.3 6.9-13.3 16.5-23.7 28.8-31.2 12.4-7.6 26.7-11.3 42.9-11.3 16 0 29.9 3.4 41.7 10.3 11.8 6.9 21 16.5 27.5 28.8 6.5 12.3 9.8 26.9 9.8 43.6v12h-129.7c1.1 17.6 6.2 31.2 15.3 40.7 9 9.5 21.5 14.2 37.5 14.2 25.6 0 41.3-9.8 47-29.5h30.2c-4.1 18.1-12.9 32-26.4 41.7-13.5 9.7-30.7 14.8-51.6 14.8z"/>
+                                <path d="M791.7 365h-21.6v-26.4h21.6c7.8 0 14.7-1.3 20.8-3.9 6.1-2.6 11-9.2 14.9-19.7l5.8-16.1-67.6-176.7h33.9l48.7 135.2 49.7-135.2h33.3L852.4 328c-5.7 14.4-12.9 24.8-21.6 31.2-8.7 6.4-19.4 9.6-32.2 9.6-5.3 0-10.2-.3-14.8-1-4.5-.7-9-1.5-13.3-2.4z"/>
+                            </g>
+                        </svg>
+                        <span class="footer-logo-text">© 2026 Tooley</span>
+                    </div>
+                    
+                    <div class="footer-links-bottom">
+                        <a href="#">Privacy</a>
+                        <a href="#">Terms</a>
+                        <a href="#">Accessibility</a>
+                    </div>
+                </div>
+                
+                <!-- Design Credit -->
+                <div class="footer-credit">
+                    Built with love by <a href="https://yellow.digital" target="_blank">yellow.digital</a>
+                </div>
             </div>
-            <div class="footer-disclaimer">
-                Tooley generates lesson plans using AI. Teachers should review and adapt all content for their specific classroom needs and local curriculum requirements.
-            </div>
-            <p class="footer-credit">
-                Named after <a href="https://www.jamesTooley.com" target="_blank">Prof. James Tooley</a>, champion of low-cost education
-            </p>
         </div>
     </footer>
 
@@ -621,7 +907,21 @@
             carousel.innerHTML = allCards;
         }
 
-        loadCarousel();
+        // Try to load from lessons.json first, fallback to default
+        fetch('lessons.json')
+            .then(response => response.json())
+            .then(data => {
+                if (data.lessons && data.lessons.length > 0) {
+                    const carousel = document.getElementById('carousel');
+                    const allCards = [...data.lessons, ...data.lessons].map(createCard).join('');
+                    carousel.innerHTML = allCards;
+                } else {
+                    loadCarousel();
+                }
+            })
+            .catch(() => {
+                loadCarousel();
+            });
     </script>
 </body>
 </html>
