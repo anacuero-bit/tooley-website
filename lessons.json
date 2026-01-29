@@ -1,6 +1,17 @@
 {
-  "lastUpdated": "2026-01-29T13:50:08.253523Z",
+  "lastUpdated": "2026-01-29T14:16:39.521279Z",
   "lessons": [
+    {
+      "id": "les_b512b198",
+      "subject": "Social Studies",
+      "topic": "Historical figures",
+      "ages": "5-7",
+      "duration": "30",
+      "country": "Ghana",
+      "teacher_name": "Keke",
+      "public": true,
+      "created_at": "2026-01-29T14:16:39.521267Z"
+    },
     {
       "id": "les_f83976c0",
       "subject": "Language",
