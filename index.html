@@ -3,976 +3,747 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tooley | Free AI Lesson Plans for Teachers</title>
-    <meta name="description" content="Free AI-powered lesson plans for teachers in low-resource schools. Generate customized lessons in seconds via Telegram.">
-    <meta name="keywords" content="lesson plans, AI, teachers, education, low-cost schools, James Tooley, classroom, teaching">
-    <meta property="og:title" content="Tooley | Free AI Lesson Plans for Teachers">
-    <meta property="og:description" content="Free AI-powered lesson plans for teachers in low-resource schools. Generate customized lessons in seconds.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://tooley.app">
+    <title>Tooley – Free AI Lesson Plans for Teachers</title>
+    <meta name="description" content="Generate customized lesson plans in seconds. Free forever for teachers in low-resource schools worldwide.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --color-primary: #f59e0b;
-            --color-primary-dark: #d97706;
-            --color-primary-light: #fbbf24;
-            --color-primary-pale: #fef3c7;
-            --color-dark: #0f172a;
-            --color-slate: #334155;
-            --color-stone: #64748b;
-            --color-mist: #e2e8f0;
-            --color-cloud: #f8fafc;
-            --color-warm: #fffbeb;
-            --color-white: #ffffff;
-            --color-telegram: #0088cc;
-            --color-telegram-dark: #006699;
-            --font-display: 'Satoshi', -apple-system, sans-serif;
-            --font-main: 'Inter', -apple-system, sans-serif;
+            --color-amber: #d97706;
+            --color-amber-dark: #b45309;
+            --color-amber-light: #fbbf24;
+            --color-ink: #111827;
+            --color-slate: #475569;
+            --color-muted: #94a3b8;
+            --color-border: #e2e8f0;
+            --color-bg: #ffffff;
+            --color-bg-soft: #f8fafc;
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
-
+        
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-
+        
         body {
-            font-family: var(--font-main);
-            font-size: 16px;
+            font-family: var(--font);
+            background: var(--color-bg);
+            color: var(--color-ink);
             line-height: 1.6;
-            color: var(--color-dark);
-            background: var(--color-warm);
-            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
         }
-
-        ::selection {
-            background: var(--color-primary);
-            color: var(--color-white);
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* ============================================
-           HEADER
-           ============================================ */
-        .header {
-            position: fixed;
+        
+        /* Header */
+        header {
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--color-border);
+            background: var(--color-bg);
+            position: sticky;
             top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(255, 251, 235, 0.95);
-            backdrop-filter: blur(10px);
             z-index: 100;
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(245, 158, 11, 0.1);
         }
-
-        .header .container {
+        
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
+            align-items: center;
             justify-content: space-between;
-            align-items: center;
         }
-
-        .logo-link {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-        }
-
+        
         .logo {
-            height: 36px;
-            width: auto;
+            height: 32px;
         }
-
+        
         .header-cta {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: var(--color-telegram);
-            color: var(--color-white);
+            background: var(--color-amber);
+            color: white;
             padding: 10px 20px;
             border-radius: 8px;
             text-decoration: none;
             font-weight: 600;
             font-size: 14px;
-            transition: all 0.2s;
+            transition: background 0.2s;
         }
-
+        
         .header-cta:hover {
-            background: var(--color-telegram-dark);
-            transform: translateY(-1px);
+            background: var(--color-amber-dark);
         }
-
+        
         .header-cta svg {
             width: 18px;
             height: 18px;
         }
-
-        /* ============================================
-           APP LAUNCHER - COMPACT
-           ============================================ */
-        .app-launcher {
-            padding: 120px 20px 60px;
-            background: linear-gradient(180deg, var(--color-warm) 0%, var(--color-primary-pale) 100%);
+        
+        /* Hero */
+        .hero {
+            padding: 80px 24px 60px;
             text-align: center;
-        }
-
-        .launcher-content {
-            max-width: 600px;
+            max-width: 800px;
             margin: 0 auto;
         }
-
-        .launcher-badge {
-            display: inline-block;
-            background: var(--color-primary);
-            color: var(--color-white);
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
-
-        .launcher-title {
-            font-family: var(--font-display);
-            font-size: clamp(2rem, 5vw, 3rem);
+        
+        .hero h1 {
+            font-size: clamp(28px, 5vw, 42px);
             font-weight: 700;
-            color: var(--color-dark);
-            margin-bottom: 12px;
+            color: var(--color-ink);
             line-height: 1.2;
+            margin-bottom: 16px;
         }
-
-        .launcher-subtitle {
-            font-size: 1.1rem;
+        
+        .hero p {
+            font-size: 18px;
             color: var(--color-slate);
-            margin-bottom: 30px;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
+            max-width: 560px;
+            margin: 0 auto 32px;
         }
-
-        /* Mobile vs Desktop launcher */
-        .mobile-launcher { display: none; }
-        .desktop-launcher { display: flex; gap: 30px; justify-content: center; align-items: center; flex-wrap: wrap; }
-
-        @media (max-width: 768px) {
-            .mobile-launcher { display: block; }
-            .desktop-launcher { display: none; }
-        }
-
-        .launcher-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            background: var(--color-telegram);
-            color: var(--color-white);
-            padding: 16px 32px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.2s;
-            box-shadow: 0 4px 15px rgba(0, 136, 204, 0.3);
-        }
-
-        .launcher-btn:hover {
-            background: var(--color-telegram-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 136, 204, 0.4);
-        }
-
-        .launcher-btn svg {
-            width: 24px;
-            height: 24px;
-        }
-
-        .qr-section {
-            text-align: center;
-        }
-
-        .qr-code {
-            width: 140px;
-            height: 140px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            margin-bottom: 12px;
-            background: white;
-        }
-
-        .qr-label {
-            font-size: 13px;
-            color: var(--color-stone);
-        }
-
-        .desktop-buttons {
+        
+        .hero-buttons {
             display: flex;
-            flex-direction: column;
-            gap: 10px;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
         }
-
-        .launcher-btn-secondary {
+        
+        .btn {
             display: inline-flex;
             align-items: center;
-            justify-content: center;
             gap: 8px;
-            background: var(--color-white);
-            color: var(--color-telegram);
-            border: 2px solid var(--color-telegram);
-            padding: 12px 24px;
+            padding: 14px 24px;
             border-radius: 10px;
-            text-decoration: none;
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 15px;
+            text-decoration: none;
             transition: all 0.2s;
+            border: none;
+            cursor: pointer;
         }
-
-        .launcher-btn-secondary:hover {
-            background: var(--color-telegram);
-            color: var(--color-white);
+        
+        .btn-primary {
+            background: var(--color-amber);
+            color: white;
         }
-
-        .launcher-btn-secondary svg {
+        
+        .btn-primary:hover {
+            background: var(--color-amber-dark);
+            transform: translateY(-1px);
+        }
+        
+        .btn-secondary {
+            background: var(--color-bg-soft);
+            color: var(--color-ink);
+            border: 1px solid var(--color-border);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--color-border);
+        }
+        
+        .btn svg {
             width: 20px;
             height: 20px;
         }
-
-        .bot-handle {
-            margin-top: 20px;
-            font-size: 14px;
-            color: var(--color-stone);
+        
+        /* QR Section (Desktop) */
+        .qr-section {
+            display: none;
+            margin-top: 40px;
+            padding-top: 32px;
+            border-top: 1px solid var(--color-border);
         }
-
-        .bot-handle code {
-            background: var(--color-white);
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-family: monospace;
-            color: var(--color-telegram);
-            font-weight: 600;
-        }
-
-        /* ============================================
-           LESSON CAROUSEL
-           ============================================ */
-        .carousel-section {
-            padding: 60px 0;
-            background: var(--color-white);
-            overflow: hidden;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding: 0 20px;
-        }
-
-        .section-label {
-            display: inline-block;
-            background: var(--color-primary-pale);
-            color: var(--color-primary-dark);
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 12px;
-        }
-
-        .section-title {
-            font-family: var(--font-display);
-            font-size: clamp(1.5rem, 3vw, 2rem);
-            font-weight: 700;
-            color: var(--color-dark);
-        }
-
-        .carousel-wrapper {
-            position: relative;
-            width: 100%;
-        }
-
-        .carousel-track {
-            display: flex;
-            gap: 20px;
-            animation: scroll 40s linear infinite;
-            width: max-content;
-        }
-
-        .carousel-track:hover {
-            animation-play-state: paused;
-        }
-
-        @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        .lesson-card {
-            flex-shrink: 0;
-            width: 300px;
-            background: var(--color-cloud);
-            border-radius: 16px;
-            padding: 24px;
-            border: 1px solid var(--color-mist);
-            transition: all 0.3s;
-        }
-
-        .lesson-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
-            border-color: var(--color-primary-light);
-        }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 16px;
-        }
-
-        .subject-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: var(--color-primary);
-            color: var(--color-white);
-            padding: 6px 12px;
-            border-radius: 8px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .subject-icon {
-            font-size: 14px;
-        }
-
-        .country-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: var(--color-white);
-            border: 1px solid var(--color-mist);
-            padding: 6px 10px;
-            border-radius: 8px;
-            font-size: 12px;
-            color: var(--color-slate);
-        }
-
-        .country-flag {
-            font-size: 16px;
-        }
-
-        .card-topic {
-            font-family: var(--font-display);
-            font-size: 1.15rem;
-            font-weight: 600;
-            color: var(--color-dark);
-            margin-bottom: 12px;
-            line-height: 1.3;
-        }
-
-        .card-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-
-        .meta-item {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 13px;
-            color: var(--color-stone);
-        }
-
-        .meta-item svg {
-            width: 14px;
-            height: 14px;
-            opacity: 0.7;
-        }
-
-        .card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 16px;
-            border-top: 1px solid var(--color-mist);
-        }
-
-        .teacher-name {
-            font-size: 13px;
-            color: var(--color-stone);
-        }
-
-        .teacher-name strong {
-            color: var(--color-slate);
-        }
-
-        /* ============================================
-           HOW IT WORKS
-           ============================================ */
-        .how-section {
-            padding: 80px 20px;
-            background: var(--color-warm);
-        }
-
-        .steps-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        @media (max-width: 768px) {
-            .steps-grid {
-                grid-template-columns: 1fr;
-                max-width: 400px;
+        
+        @media (min-width: 768px) {
+            .qr-section {
+                display: block;
             }
         }
-
-        .step-card {
-            text-align: center;
-            padding: 30px 20px;
+        
+        .qr-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
         }
-
+        
+        .qr-code {
+            width: 120px;
+            height: 120px;
+            border-radius: 12px;
+            border: 1px solid var(--color-border);
+        }
+        
+        .qr-text {
+            text-align: left;
+        }
+        
+        .qr-text p {
+            font-size: 14px;
+            color: var(--color-slate);
+            margin: 0;
+        }
+        
+        .qr-text code {
+            display: inline-block;
+            margin-top: 4px;
+            background: var(--color-bg-soft);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-ink);
+        }
+        
+        /* How It Works */
+        .how-it-works {
+            background: var(--color-bg-soft);
+            padding: 60px 24px;
+        }
+        
+        .how-it-works h2 {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 40px;
+        }
+        
+        .steps {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 32px;
+        }
+        
+        .step {
+            text-align: center;
+        }
+        
         .step-number {
-            width: 50px;
-            height: 50px;
-            background: var(--color-telegram);
-            color: var(--color-white);
+            width: 48px;
+            height: 48px;
+            background: var(--color-amber);
+            color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: var(--font-display);
-            font-size: 1.25rem;
             font-weight: 700;
+            font-size: 20px;
             margin: 0 auto 16px;
         }
-
-        .step-title {
-            font-family: var(--font-display);
-            font-size: 1.15rem;
+        
+        .step h3 {
+            font-size: 16px;
             font-weight: 600;
-            color: var(--color-dark);
             margin-bottom: 8px;
         }
-
-        .step-desc {
-            font-size: 0.95rem;
-            color: var(--color-stone);
+        
+        .step p {
+            font-size: 14px;
+            color: var(--color-slate);
         }
-
-        /* ============================================
-           FEATURES
-           ============================================ */
-        .features-section {
-            padding: 80px 20px;
-            background: var(--color-white);
+        
+        .free-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--color-amber-light), var(--color-amber));
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: 24px;
         }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
+        
+        /* Lessons Carousel */
+        .lessons-section {
+            padding: 60px 0;
+            overflow: hidden;
+        }
+        
+        .lessons-header {
+            text-align: center;
+            padding: 0 24px;
+            margin-bottom: 32px;
+        }
+        
+        .lessons-header h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .lessons-header p {
+            color: var(--color-slate);
+            font-size: 15px;
+        }
+        
+        .carousel-track {
+            display: flex;
             gap: 20px;
+            animation: scroll 80s linear infinite;
+            width: max-content;
+        }
+        
+        .carousel-track:hover {
+            animation-play-state: paused;
+        }
+        
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        .lesson-card {
+            flex-shrink: 0;
+            width: 320px;
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.2s;
+        }
+        
+        .lesson-card:hover {
+            border-color: var(--color-amber);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        
+        .card-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--color-bg-soft);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+        
+        .card-title-area {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .card-subject {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-amber-dark);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .card-topic {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-ink);
+            line-height: 1.3;
+            margin-top: 2px;
+        }
+        
+        .card-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--color-border);
+        }
+        
+        .meta-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            color: var(--color-slate);
+            background: var(--color-bg-soft);
+            padding: 4px 8px;
+            border-radius: 6px;
+        }
+        
+        .meta-item .flag {
+            font-size: 14px;
+        }
+        
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--color-border);
+        }
+        
+        .card-author {
+            font-size: 12px;
+            color: var(--color-muted);
+        }
+        
+        .card-type {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--color-amber-dark);
+            background: rgba(217, 119, 6, 0.1);
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--color-ink);
+            color: white;
+            padding: 48px 24px 32px;
+        }
+        
+        .footer-inner {
             max-width: 1000px;
             margin: 0 auto;
         }
-
-        @media (max-width: 900px) {
-            .features-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-
-        @media (max-width: 500px) {
-            .features-grid { grid-template-columns: 1fr; }
-        }
-
-        .feature-card {
-            background: var(--color-cloud);
-            border-radius: 12px;
-            padding: 24px 20px;
-            text-align: center;
-            border: 1px solid var(--color-mist);
-            transition: all 0.2s;
-        }
-
-        .feature-card:hover {
-            border-color: var(--color-primary-light);
-            transform: translateY(-2px);
-        }
-
-        .feature-icon {
-            font-size: 2rem;
-            margin-bottom: 12px;
-        }
-
-        .feature-title {
-            font-family: var(--font-display);
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--color-dark);
-            margin-bottom: 6px;
-        }
-
-        .feature-desc {
-            font-size: 0.85rem;
-            color: var(--color-stone);
-        }
-
-        /* ============================================
-           ABOUT
-           ============================================ */
-        .about-section {
-            padding: 80px 20px;
-            background: var(--color-primary-pale);
-        }
-
-        .about-content {
-            max-width: 700px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .about-title {
-            font-family: var(--font-display);
-            font-size: clamp(1.5rem, 3vw, 2rem);
-            font-weight: 700;
-            color: var(--color-dark);
-            margin-bottom: 20px;
-        }
-
-        .about-text {
-            font-size: 1.05rem;
-            color: var(--color-slate);
-            line-height: 1.8;
-            margin-bottom: 16px;
-        }
-
-        .about-attribution {
-            font-size: 0.9rem;
-            color: var(--color-stone);
-            font-style: italic;
-        }
-
-        /* ============================================
-           CTA
-           ============================================ */
-        .cta-section {
-            padding: 80px 20px;
-            background: var(--color-telegram);
-            text-align: center;
-        }
-
-        .cta-title {
-            font-family: var(--font-display);
-            font-size: clamp(1.5rem, 4vw, 2.25rem);
-            font-weight: 700;
-            color: var(--color-white);
-            margin-bottom: 16px;
-        }
-
-        .cta-text {
-            font-size: 1.1rem;
-            color: rgba(255,255,255,0.9);
-            margin-bottom: 30px;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta-btn {
-            display: inline-flex;
+        
+        .footer-top {
+            display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 10px;
-            background: var(--color-white);
-            color: var(--color-telegram);
-            padding: 16px 36px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1.1rem;
-            transition: all 0.2s;
-        }
-
-        .cta-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-        }
-
-        .cta-btn svg {
-            width: 24px;
-            height: 24px;
-        }
-
-        /* ============================================
-           FOOTER
-           ============================================ */
-        .footer {
-            background: var(--color-dark);
-            color: var(--color-white);
-            padding: 40px 20px 30px;
-        }
-
-        .footer-content {
-            max-width: 800px;
-            margin: 0 auto;
+            gap: 20px;
             text-align: center;
+            padding-bottom: 32px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
-
+        
         .footer-logo {
             height: 28px;
-            margin-bottom: 20px;
-            opacity: 0.9;
+            filter: brightness(0) invert(1);
         }
-
+        
         .footer-tagline {
-            font-size: 0.95rem;
             color: rgba(255,255,255,0.7);
-            margin-bottom: 24px;
+            font-size: 14px;
         }
-
+        
         .footer-links {
             display: flex;
-            justify-content: center;
             gap: 24px;
-            margin-bottom: 24px;
-            flex-wrap: wrap;
         }
-
+        
         .footer-links a {
-            color: rgba(255,255,255,0.6);
+            color: rgba(255,255,255,0.7);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 14px;
             transition: color 0.2s;
         }
-
+        
         .footer-links a:hover {
-            color: var(--color-primary);
+            color: white;
         }
-
-        .footer-divider {
-            height: 1px;
-            background: rgba(255,255,255,0.1);
-            margin-bottom: 24px;
-        }
-
-        .footer-disclaimer {
-            font-size: 0.8rem;
-            color: rgba(255,255,255,0.5);
-            line-height: 1.7;
-            max-width: 600px;
-            margin: 0 auto 20px;
-        }
-
+        
         .footer-bottom {
-            font-size: 0.85rem;
+            padding-top: 24px;
+            text-align: center;
+        }
+        
+        .footer-disclaimer {
+            font-size: 12px;
+            color: rgba(255,255,255,0.5);
+            max-width: 700px;
+            margin: 0 auto 16px;
+            line-height: 1.7;
+        }
+        
+        .footer-credit {
+            font-size: 12px;
             color: rgba(255,255,255,0.4);
         }
-
-        .footer-bottom a {
-            color: rgba(255,255,255,0.5);
+        
+        .footer-credit a {
+            color: var(--color-amber-light);
             text-decoration: none;
         }
-
-        .footer-bottom a:hover {
-            color: var(--color-primary);
+        
+        /* Mobile adjustments */
+        @media (max-width: 640px) {
+            .hero {
+                padding: 48px 20px 40px;
+            }
+            
+            .hero h1 {
+                font-size: 26px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
+            }
+            
+            .steps {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            
+            .lesson-card {
+                width: 280px;
+            }
+            
+            .footer-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- HEADER -->
-    <header class="header">
-        <div class="container">
-            <a href="/" class="logo-link">
-                <img src="logo.svg" alt="Tooley" class="logo">
-            </a>
-            <a href="https://t.me/TooleyAppBot" class="header-cta" target="_blank">
+    <!-- Header -->
+    <header>
+        <div class="header-inner">
+            <img src="logo.svg" alt="Tooley" class="logo">
+            <a href="https://t.me/TooleyAppBot" class="header-cta">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
                 Open Tooley
             </a>
         </div>
     </header>
 
-    <!-- APP LAUNCHER -->
-    <section class="app-launcher">
-        <div class="launcher-content">
-            <span class="launcher-badge">✨ 100% Free — Always</span>
-            <h1 class="launcher-title">AI Lesson Plans in Seconds</h1>
-            <p class="launcher-subtitle">Generate customized lesson plans for any subject, age group, and duration. Works on any phone via Telegram.</p>
-            
-            <!-- Mobile: Direct button -->
-            <div class="mobile-launcher">
-                <a href="https://t.me/TooleyAppBot" class="launcher-btn" target="_blank">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
-                    Open Tooley in Telegram
-                </a>
-            </div>
-            
-            <!-- Desktop: QR + buttons -->
-            <div class="desktop-launcher">
-                <div class="qr-section">
-                    <img src="tooley-qr-clean.png" alt="Scan to open Tooley" class="qr-code">
-                    <p class="qr-label">Scan with your phone</p>
-                </div>
-                <div class="desktop-buttons">
-                    <a href="https://web.telegram.org/k/#@TooleyAppBot" class="launcher-btn" target="_blank">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
-                        Open Telegram Web
-                    </a>
-                    <a href="https://t.me/TooleyAppBot" class="launcher-btn-secondary" target="_blank">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
-                        Open in Telegram App
-                    </a>
-                </div>
-            </div>
-            
-            <p class="bot-handle">Or search <code>@TooleyAppBot</code> in Telegram</p>
+    <!-- Hero -->
+    <section class="hero">
+        <h1>AI lesson plans for teachers in low-resource schools</h1>
+        <p>Generate customized, curriculum-aligned lesson plans in seconds. Subject, topic, age group, duration—you choose, AI creates.</p>
+        
+        <div class="hero-buttons">
+            <a href="https://t.me/TooleyAppBot" class="btn btn-primary">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+                Start on Telegram
+            </a>
+            <a href="https://web.telegram.org/k/#@TooleyAppBot" class="btn btn-secondary" target="_blank">
+                Open in Browser
+            </a>
         </div>
-    </section>
-
-    <!-- LESSON CAROUSEL -->
-    <section class="carousel-section">
-        <div class="section-header">
-            <span class="section-label">Community Lessons</span>
-            <h2 class="section-title">Recently Created by Teachers</h2>
-        </div>
-        <div class="carousel-wrapper">
-            <div class="carousel-track" id="carouselTrack">
-                <!-- Cards populated by JS -->
+        
+        <div class="qr-section">
+            <div class="qr-wrapper">
+                <img src="tooley-qr-clean.png" alt="Scan to open Tooley" class="qr-code">
+                <div class="qr-text">
+                    <p>Scan with your phone camera</p>
+                    <code>@TooleyAppBot</code>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- HOW IT WORKS -->
-    <section class="how-section">
-        <div class="section-header">
-            <span class="section-label">How It Works</span>
-            <h2 class="section-title">Three Simple Steps</h2>
-        </div>
-        <div class="steps-grid">
-            <div class="step-card">
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <h2>How It Works</h2>
+        <div class="steps">
+            <div class="step">
                 <div class="step-number">1</div>
-                <h3 class="step-title">Open Telegram</h3>
-                <p class="step-desc">Search for @TooleyAppBot or scan the QR code above</p>
+                <h3>Open Tooley on Telegram</h3>
+                <p>No downloads or sign-ups needed. Works on any device with Telegram.</p>
             </div>
-            <div class="step-card">
+            <div class="step">
                 <div class="step-number">2</div>
-                <h3 class="step-title">Describe Your Lesson</h3>
-                <p class="step-desc">Tell us the subject, topic, age group, and duration</p>
+                <h3>Tell it what you need</h3>
+                <p>Subject, topic, age range, duration. Type or use voice messages.</p>
             </div>
-            <div class="step-card">
+            <div class="step">
                 <div class="step-number">3</div>
-                <h3 class="step-title">Get Your Plan</h3>
-                <p class="step-desc">Receive a detailed lesson plan as chat, PDF, or HTML</p>
+                <h3>Get your lesson plan</h3>
+                <p>Receive a complete lesson in chat, PDF, or HTML—ready to teach.</p>
             </div>
+        </div>
+        <div style="text-align: center;">
+            <span class="free-badge">✨ Always Free for Teachers</span>
         </div>
     </section>
 
-    <!-- FEATURES -->
-    <section class="features-section">
-        <div class="section-header">
-            <span class="section-label">Features</span>
-            <h2 class="section-title">Built for Real Classrooms</h2>
+    <!-- Lessons Carousel -->
+    <section class="lessons-section">
+        <div class="lessons-header">
+            <h2>Lessons Created by Teachers</h2>
+            <p>See what educators around the world are building with Tooley</p>
         </div>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">📱</div>
-                <h3 class="feature-title">Works on Any Phone</h3>
-                <p class="feature-desc">No app download required — just Telegram</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🎤</div>
-                <h3 class="feature-title">Voice Input</h3>
-                <p class="feature-desc">Describe your lesson by speaking</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">📄</div>
-                <h3 class="feature-title">PDF & HTML Export</h3>
-                <p class="feature-desc">Download and print your lessons</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🌍</div>
-                <h3 class="feature-title">Multi-Language</h3>
-                <p class="feature-desc">Generate lessons in any language</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">⚡</div>
-                <h3 class="feature-title">Instant Generation</h3>
-                <p class="feature-desc">Complete plans in under 30 seconds</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🎯</div>
-                <h3 class="feature-title">Age-Appropriate</h3>
-                <p class="feature-desc">Tailored to your students' level</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">📚</div>
-                <h3 class="feature-title">All Subjects</h3>
-                <p class="feature-desc">Math, Science, Language, and more</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">💯</div>
-                <h3 class="feature-title">100% Free</h3>
-                <p class="feature-desc">No subscriptions, no hidden fees</p>
-            </div>
+        <div class="carousel-track" id="carousel">
+            <!-- Cards populated by JS -->
         </div>
     </section>
 
-    <!-- ABOUT -->
-    <section class="about-section" id="about">
-        <div class="about-content">
-            <span class="section-label">Our Mission</span>
-            <h2 class="about-title">Empowering Teachers Everywhere</h2>
-            <p class="about-text">
-                Tooley is named after Professor James Tooley, whose research revealed that low-cost private schools in developing countries often outperform government schools — because their teachers are accountable to the parents they serve.
-            </p>
-            <p class="about-text">
-                We believe great teaching shouldn't require expensive resources. Tooley gives every teacher access to professional lesson planning, whether they're in Lagos, Lima, or Los Angeles.
-            </p>
-            <p class="about-attribution">
-                Built with ❤️ for teachers worldwide
-            </p>
-        </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="cta-section">
-        <h2 class="cta-title">Ready to Create Your First Lesson?</h2>
-        <p class="cta-text">Join thousands of teachers using Tooley to save time and inspire students.</p>
-        <a href="https://t.me/TooleyAppBot" class="cta-btn" target="_blank">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
-            Start Now — It's Free
-        </a>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="footer">
-        <div class="footer-content">
-            <img src="logo-white.svg" alt="Tooley" class="footer-logo">
-            <p class="footer-tagline">Free AI lesson plans for teachers worldwide</p>
-            
-            <div class="footer-links">
-                <a href="https://t.me/TooleyAppBot" target="_blank">Open Tooley</a>
-                <a href="#about">About</a>
-                <a href="mailto:hello@tooley.app">Contact</a>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-top">
+                <img src="logo.svg" alt="Tooley" class="footer-logo">
+                <p class="footer-tagline">Free AI lesson plans for teachers worldwide</p>
+                <div class="footer-links">
+                    <a href="https://t.me/TooleyAppBot">Open Tooley</a>
+                    <a href="mailto:hello@tooley.app">Contact</a>
+                </div>
             </div>
-            
-            <div class="footer-divider"></div>
-            
-            <p class="footer-disclaimer">
-                Tooley is an educational tool that generates lesson plan suggestions using AI. Teachers should review and adapt all generated content to meet their specific classroom needs and local curriculum requirements. Tooley does not store personal information beyond what is necessary to provide the service.
-            </p>
-            
-            <p class="footer-bottom">
-                © 2026 Tooley. Open source project inspired by <a href="https://www.jametooley.org/" target="_blank">Prof. James Tooley</a>'s research.
-            </p>
+            <div class="footer-bottom">
+                <p class="footer-disclaimer">
+                    Tooley generates lesson plans using AI. Content should be reviewed by teachers before classroom use. 
+                    Not affiliated with any government education authority. Designed for educators in low-resource schools.
+                </p>
+                <p class="footer-credit">
+                    Inspired by <a href="https://www.jamestooley.org/" target="_blank">Prof. James Tooley</a>'s work on low-cost education. 
+                    © 2026 Tooley
+                </p>
+            </div>
         </div>
     </footer>
 
     <script>
-        // Country data with flags
-        const COUNTRIES = {
-            'India': { flag: '🇮🇳', name: 'India' },
-            'Nigeria': { flag: '🇳🇬', name: 'Nigeria' },
-            'Kenya': { flag: '🇰🇪', name: 'Kenya' },
-            'Philippines': { flag: '🇵🇭', name: 'Philippines' },
-            'Pakistan': { flag: '🇵🇰', name: 'Pakistan' },
-            'Bangladesh': { flag: '🇧🇩', name: 'Bangladesh' },
-            'Uganda': { flag: '🇺🇬', name: 'Uganda' },
-            'Ghana': { flag: '🇬🇭', name: 'Ghana' },
-            'South Africa': { flag: '🇿🇦', name: 'South Africa' },
-            'Tanzania': { flag: '🇹🇿', name: 'Tanzania' },
-            'United States': { flag: '🇺🇸', name: 'United States' },
-            'United Kingdom': { flag: '🇬🇧', name: 'United Kingdom' },
-            'Australia': { flag: '🇦🇺', name: 'Australia' },
-            'Canada': { flag: '🇨🇦', name: 'Canada' }
-        };
-
-        // Subject icons
-        const SUBJECT_ICONS = {
-            'Mathematics': '📐',
-            'Science': '🔬',
-            'Language': '📝',
-            'Reading': '📖',
-            'Social Studies': '🌍',
-            'Art': '🎨',
-            'Music': '🎵',
-            'Physical Education': '⚽'
-        };
-
-        // Sample lessons (fallback)
-        const SAMPLE_LESSONS = [
-            { subject: 'Mathematics', topic: 'Fractions: Fair Sharing', ages: '8-10', duration: '45', country: 'Kenya', teacher_name: 'Teacher Mary' },
-            { subject: 'Science', topic: 'The Water Cycle', ages: '10-12', duration: '40', country: 'India', teacher_name: 'Priya S.' },
-            { subject: 'Language', topic: 'Storytelling Basics', ages: '6-8', duration: '30', country: 'Nigeria', teacher_name: 'Teacher Chioma' },
-            { subject: 'Social Studies', topic: 'Community Helpers', ages: '7-9', duration: '35', country: 'Philippines', teacher_name: 'Teacher Joy' },
-            { subject: 'Mathematics', topic: 'Multiplication Tables', ages: '9-11', duration: '40', country: 'Ghana', teacher_name: 'Mr. Kwame' },
-            { subject: 'Science', topic: 'Plant Life Cycle', ages: '8-10', duration: '45', country: 'Pakistan', teacher_name: 'Ms. Fatima' },
-            { subject: 'Reading', topic: 'Reading Comprehension', ages: '7-9', duration: '30', country: 'Uganda', teacher_name: 'Teacher Grace' },
-            { subject: 'Art', topic: 'Color Mixing', ages: '6-8', duration: '35', country: 'South Africa', teacher_name: 'Ms. Thandi' }
+        // Lesson data - will be fetched from lessons.json
+        const defaultLessons = [
+            {
+                subject: "Mathematics",
+                icon: "📐",
+                topic: "Introduction to Fractions",
+                country: "India",
+                flag: "🇮🇳",
+                ages: "8-10",
+                duration: "45 min",
+                type: "Interactive",
+                author: "Teacher Priya"
+            },
+            {
+                subject: "Science",
+                icon: "🔬",
+                topic: "The Water Cycle",
+                country: "Nigeria",
+                flag: "🇳🇬",
+                ages: "10-12",
+                duration: "40 min",
+                type: "Hands-on",
+                author: "Teacher Chidi"
+            },
+            {
+                subject: "Language",
+                icon: "📖",
+                topic: "Creative Story Writing",
+                country: "Kenya",
+                flag: "🇰🇪",
+                ages: "9-11",
+                duration: "50 min",
+                type: "Workshop",
+                author: "Teacher Amina"
+            },
+            {
+                subject: "Social Studies",
+                icon: "🌍",
+                topic: "Our Local Community",
+                country: "Ghana",
+                flag: "🇬🇭",
+                ages: "7-9",
+                duration: "35 min",
+                type: "Discussion",
+                author: "Teacher Kofi"
+            },
+            {
+                subject: "Reading",
+                icon: "📚",
+                topic: "Phonics Practice",
+                country: "Pakistan",
+                flag: "🇵🇰",
+                ages: "5-7",
+                duration: "30 min",
+                type: "Activity",
+                author: "Teacher Fatima"
+            },
+            {
+                subject: "Art",
+                icon: "🎨",
+                topic: "Nature Drawing",
+                country: "Philippines",
+                flag: "🇵🇭",
+                ages: "8-10",
+                duration: "45 min",
+                type: "Creative",
+                author: "Teacher Maria"
+            },
+            {
+                subject: "Mathematics",
+                icon: "📐",
+                topic: "Basic Multiplication",
+                country: "Uganda",
+                flag: "🇺🇬",
+                ages: "7-9",
+                duration: "40 min",
+                type: "Practice",
+                author: "Teacher Joseph"
+            },
+            {
+                subject: "Science",
+                icon: "🔬",
+                topic: "Plant Life Cycle",
+                country: "Tanzania",
+                flag: "🇹🇿",
+                ages: "9-11",
+                duration: "45 min",
+                type: "Experiment",
+                author: "Teacher Grace"
+            }
         ];
 
-        function createLessonCard(lesson) {
-            const country = COUNTRIES[lesson.country] || { flag: '🌍', name: lesson.country };
-            const icon = SUBJECT_ICONS[lesson.subject] || '📚';
-            
+        function createCard(lesson) {
             return `
                 <div class="lesson-card">
                     <div class="card-header">
-                        <span class="subject-badge">
-                            <span class="subject-icon">${icon}</span>
-                            ${lesson.subject}
-                        </span>
-                        <span class="country-badge">
-                            <span class="country-flag">${country.flag}</span>
-                            ${country.name}
-                        </span>
+                        <div class="card-icon">${lesson.icon}</div>
+                        <div class="card-title-area">
+                            <div class="card-subject">${lesson.subject}</div>
+                            <div class="card-topic">${lesson.topic}</div>
+                        </div>
                     </div>
-                    <h3 class="card-topic">${lesson.topic}</h3>
                     <div class="card-meta">
-                        <span class="meta-item">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-                            ${lesson.duration} min
-                        </span>
-                        <span class="meta-item">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-                            Ages ${lesson.ages}
-                        </span>
+                        <span class="meta-item"><span class="flag">${lesson.flag}</span> ${lesson.country}</span>
+                        <span class="meta-item">👤 ${lesson.ages}</span>
+                        <span class="meta-item">⏱ ${lesson.duration}</span>
                     </div>
                     <div class="card-footer">
-                        <span class="teacher-name">by <strong>${lesson.teacher_name}</strong></span>
+                        <span class="card-author">by ${lesson.author}</span>
+                        <span class="card-type">${lesson.type}</span>
                     </div>
                 </div>
             `;
         }
 
         async function loadLessons() {
-            const track = document.getElementById('carouselTrack');
-            let lessons = SAMPLE_LESSONS;
+            let lessons = defaultLessons;
             
             try {
-                const response = await fetch('lessons.json?v=' + Date.now());
-                const data = await response.json();
-                if (data.lessons && data.lessons.length > 0) {
-                    lessons = data.lessons;
+                const response = await fetch('lessons.json');
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.lessons && data.lessons.length > 0) {
+                        lessons = data.lessons;
+                    }
                 }
             } catch (e) {
-                console.log('Using sample lessons');
+                console.log('Using default lessons');
             }
-            
-            // Duplicate for infinite scroll effect
-            const allLessons = [...lessons, ...lessons];
-            track.innerHTML = allLessons.map(createLessonCard).join('');
+
+            const carousel = document.getElementById('carousel');
+            // Duplicate for infinite scroll
+            const allCards = [...lessons, ...lessons].map(createCard).join('');
+            carousel.innerHTML = allCards;
         }
 
-        // Load lessons on page load
         loadLessons();
     </script>
 </body>
