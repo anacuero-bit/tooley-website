@@ -848,7 +848,7 @@
         </div>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         // Country to flag mapping - COMPREHENSIVE
         const FLAGS = {
             'Uganda': '🇺🇬', 'Kenya': '🇰🇪', 'India': '🇮🇳', 'Nigeria': '🇳🇬',
@@ -953,4 +953,13 @@
                     const combined = [...data.lessons, ...DEFAULT_LESSONS];
                     renderCarousel(combined);
                 } else {
-                    renderCa
+                    renderCarousel(DEFAULT_LESSONS);
+                }
+            })
+            .catch(() => {
+                // On any error, use defaults
+                renderCarousel(DEFAULT_LESSONS);
+            });
+    </script>
+</body>
+</html>
