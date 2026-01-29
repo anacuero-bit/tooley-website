@@ -1,6 +1,17 @@
 {
-  "lastUpdated": "2026-01-29T06:24:44.429697Z",
+  "lastUpdated": "2026-01-29T07:07:20.884760Z",
   "lessons": [
+    {
+      "id": "les_27f33c65",
+      "subject": "SOCIAL STUDIES",
+      "topic": "Sustainable Living",
+      "ages": "7-9",
+      "duration": "45",
+      "country": "Uganda",
+      "teacher_name": "Bobi Wine",
+      "public": true,
+      "created_at": "2026-01-29T07:07:20.884746Z"
+    },
     {
       "id": "les_33d90ff9",
       "subject": "LANGUAGE",
