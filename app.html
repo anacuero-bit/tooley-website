@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <!--
     TOOLEY WEB APP - app.html
-    Version: 1.2.0
+    Version: 1.3.0
     Updated: 2026-01-30
     
     CHANGELOG:
+    v1.3.0 (2026-01-30)
+    - FIX: PDF download now works on mobile (uses window.open for better compatibility)
+    - UI: PDF button now matches other buttons (white fill, amber border)
+    - UI: All action buttons now have consistent styling
+    
     v1.2.0 (2026-01-30)
     - UX: Added 15 countries to match Telegram bot (was 9)
     - UI: Hover states now use border thickening instead of yellow fill
-    - UI: More subtle, professional hover feedback
     
     v1.1.0 (2026-01-30)
     - UX: Topic step now shows suggestions first, one-click advances
-    - UX: Custom topic input moved below suggestions with "Go" button
     - UX: Removed Continue buttons - all selections auto-advance
-    - UI: Smaller buttons, icons, and emojis for more sober design
     
     v1.0.0 (2026-01-30)
     - Initial release
-    - 8-step guided flow: Mode → Subject → Topic → Ages → Duration → Country → Materials → Style
-    - API integration with Railway backend
 -->
 <html lang="en">
 <head>
@@ -30,6 +30,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
@@ -186,7 +187,7 @@
         .option-btn:hover {
             border-color: var(--amber);
             border-width: 2px;
-            padding: 11.5px 13.5px; /* compensate for border width */
+            padding: 11.5px 13.5px;
         }
         
         .option-btn.selected {
@@ -524,7 +525,7 @@
         
         .action-btn {
             flex: 1;
-            min-width: 100px;
+            min-width: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -535,13 +536,22 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.15s;
+            background: var(--white);
+            color: var(--amber-dark);
+            border: 1.5px solid var(--amber);
+        }
+        
+        .action-btn:hover {
+            background: var(--amber-pale);
+            border-color: var(--amber-dark);
         }
         
         .action-btn svg { width: 16px; height: 16px; }
-        .action-btn.primary { background: var(--amber); color: white; border: none; }
-        .action-btn.primary:hover { background: var(--amber-dark); }
-        .action-btn.secondary { background: var(--white); color: var(--slate); border: 1.5px solid var(--gray-200); }
-        .action-btn.secondary:hover { border-color: var(--gray-300); background: var(--gray-50); }
+        
+        .action-btn.loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
         
         .success-message {
             display: none;
@@ -944,15 +954,15 @@
             <div class="result-content" id="resultContent"></div>
             
             <div class="action-buttons">
-                <button class="action-btn primary" onclick="downloadPDF()">
+                <button class="action-btn" id="pdfBtn" onclick="downloadPDF()">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
                     PDF
                 </button>
-                <button class="action-btn secondary" onclick="downloadHTML()">
+                <button class="action-btn" onclick="downloadHTML()">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
                     HTML
                 </button>
-                <button class="action-btn secondary" onclick="copyToClipboard()">
+                <button class="action-btn" onclick="copyToClipboard()">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
                     Copy
                 </button>
@@ -1167,33 +1177,182 @@
         }
         
         async function downloadPDF() {
+            const btn = document.getElementById('pdfBtn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation: spin 1s linear infinite;"><circle cx="12" cy="12" r="10" stroke-opacity="0.25"/><path d="M12 2a10 10 0 0 1 10 10"/></svg> Creating...';
+            btn.classList.add('loading');
+            
             try {
-                const response = await fetch(`${API_URL}/api/pdf`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ content: generatedLesson, ...lessonParams })
-                });
-                if (!response.ok) throw new Error('PDF generation failed');
-                const blob = await response.blob();
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = `tooley-${lessonParams.topic.toLowerCase().replace(/\s+/g, '-')}.pdf`;
-                a.click();
-                URL.revokeObjectURL(url);
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                
+                // Colors
+                const amber = [217, 119, 6];
+                const navy = [15, 23, 42];
+                const slate = [51, 65, 85];
+                const amberPale = [255, 251, 235];
+                
+                // Header - amber bar + logo
+                doc.setFillColor(...amber);
+                doc.rect(10, 10, 4, 12, 'F');
+                doc.setFontSize(18);
+                doc.setTextColor(...amber);
+                doc.setFont('helvetica', 'bold');
+                doc.text('tooley', 18, 19);
+                doc.setFontSize(9);
+                doc.setTextColor(100, 100, 100);
+                doc.setFont('helvetica', 'normal');
+                doc.text('tooley.app', 200, 16, { align: 'right' });
+                
+                // Specs box
+                const specsY = 30;
+                doc.setFillColor(...amberPale);
+                doc.setDrawColor(...navy);
+                doc.rect(10, specsY, 190, 38, 'FD');
+                doc.setFontSize(9);
+                doc.setTextColor(...amber);
+                doc.setFont('helvetica', 'bold');
+                doc.text('LESSON SPECIFICATIONS', 15, specsY + 8);
+                doc.setFont('helvetica', 'normal');
+                doc.setTextColor(...navy);
+                doc.text(`Subject: ${lessonParams.subject}`, 15, specsY + 16);
+                doc.text(`Topic: ${lessonParams.topic}`, 15, specsY + 22);
+                doc.text(`Ages: ${lessonParams.ages} years`, 15, specsY + 28);
+                doc.text(`Duration: ${lessonParams.duration} min`, 110, specsY + 16);
+                doc.text(`Location: ${lessonParams.country}`, 110, specsY + 22);
+                
+                // Content
+                let y = specsY + 48;
+                doc.setFontSize(10);
+                doc.setTextColor(...navy);
+                
+                const lines = generatedLesson.split('\n');
+                for (const line of lines) {
+                    if (y > 270) {
+                        doc.addPage();
+                        y = 20;
+                    }
+                    
+                    const trimmed = line.trim();
+                    if (!trimmed) {
+                        y += 4;
+                        continue;
+                    }
+                    
+                    if (trimmed.startsWith('## ')) {
+                        y += 6;
+                        doc.setFont('helvetica', 'bold');
+                        doc.setFontSize(12);
+                        doc.setTextColor(...amber);
+                        doc.text(trimmed.replace('## ', ''), 10, y);
+                        doc.setFont('helvetica', 'normal');
+                        doc.setFontSize(10);
+                        doc.setTextColor(...navy);
+                        y += 8;
+                    } else if (trimmed.startsWith('**') && trimmed.endsWith('**')) {
+                        doc.setFont('helvetica', 'bold');
+                        const text = trimmed.replace(/\*\*/g, '');
+                        const splitText = doc.splitTextToSize(text, 180);
+                        doc.text(splitText, 10, y);
+                        y += splitText.length * 5 + 2;
+                        doc.setFont('helvetica', 'normal');
+                    } else if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
+                        const text = '• ' + trimmed.substring(2);
+                        const splitText = doc.splitTextToSize(text, 175);
+                        doc.text(splitText, 15, y);
+                        y += splitText.length * 5 + 1;
+                    } else {
+                        // Handle inline bold
+                        const cleanText = trimmed.replace(/\*\*(.+?)\*\*/g, '$1');
+                        const splitText = doc.splitTextToSize(cleanText, 180);
+                        doc.text(splitText, 10, y);
+                        y += splitText.length * 5 + 1;
+                    }
+                }
+                
+                // Footer on last page
+                const pageCount = doc.internal.getNumberOfPages();
+                for (let i = 1; i <= pageCount; i++) {
+                    doc.setPage(i);
+                    doc.setFontSize(8);
+                    doc.setTextColor(128, 128, 128);
+                    doc.text('Generated by Tooley | tooley.app | Free for all teachers', 105, 290, { align: 'center' });
+                    doc.text(`Page ${i} of ${pageCount}`, 200, 290, { align: 'right' });
+                }
+                
+                // Save
+                const filename = `tooley-${lessonParams.topic.toLowerCase().replace(/\s+/g, '-')}.pdf`;
+                doc.save(filename);
+                
+                btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M20 6L9 17l-5-5"/></svg> Done!';
+                setTimeout(() => { btn.innerHTML = originalText; btn.classList.remove('loading'); }, 2000);
+                
             } catch (error) {
-                alert('PDF download failed. Please try copying the text instead.');
+                console.error('PDF error:', error);
+                btn.innerHTML = originalText;
+                btn.classList.remove('loading');
+                alert('PDF generation failed. Try the HTML or Copy options.');
             }
         }
         
         function downloadHTML() {
-            const html = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>${lessonParams.topic} - Lesson Plan</title><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',sans-serif;max-width:800px;margin:0 auto;padding:40px 20px;color:#0f172a}.header{border-bottom:2px solid #d97706;padding-bottom:16px;margin-bottom:24px}.logo{color:#d97706;font-size:24px;font-weight:700}.specs{background:#fffbeb;padding:20px;border-radius:8px;margin-bottom:24px}.specs-title{color:#d97706;font-size:12px;font-weight:700;text-transform:uppercase;margin-bottom:12px}.spec{margin-bottom:6px}.spec strong{color:#334155}h2{color:#d97706;font-size:18px;margin:24px 0 12px;border-bottom:2px solid #fef3c7;padding-bottom:6px}p{margin-bottom:12px;line-height:1.6}ul,ol{margin:12px 0 12px 24px}li{margin-bottom:8px}.footer{margin-top:40px;padding-top:20px;border-top:1px solid #e2e8f0;text-align:center;color:#64748b;font-size:13px}</style></head><body><div class="header"><div class="logo">tooley</div></div><div class="specs"><div class="specs-title">Lesson Specifications</div><div class="spec"><strong>Subject:</strong> ${lessonParams.subject}</div><div class="spec"><strong>Topic:</strong> ${lessonParams.topic}</div><div class="spec"><strong>Ages:</strong> ${lessonParams.ages} years</div><div class="spec"><strong>Duration:</strong> ${lessonParams.duration} minutes</div><div class="spec"><strong>Location:</strong> ${lessonParams.country}</div></div><div class="content">${generatedLesson.replace(/^## (.+)$/gm, '<h2>$1</h2>').replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/^- (.+)$/gm, '<li>$1</li>').replace(/\n\n/g, '</p><p>')}</div><div class="footer">Generated by Tooley · tooley.app · Free for all teachers</div></body></html>`;
+            const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${lessonParams.topic} - Lesson Plan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; max-width: 800px; margin: 0 auto; padding: 40px 20px; color: #0f172a; line-height: 1.6; }
+        .header { border-bottom: 3px solid #d97706; padding-bottom: 16px; margin-bottom: 24px; }
+        .logo { color: #d97706; font-size: 28px; font-weight: 700; }
+        .specs { background: #fffbeb; padding: 20px; border-radius: 12px; margin-bottom: 24px; border-left: 4px solid #f59e0b; }
+        .specs-title { color: #d97706; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; }
+        .specs-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+        .spec { font-size: 14px; }
+        .spec strong { color: #334155; }
+        h2 { color: #d97706; font-size: 18px; margin: 28px 0 12px; border-bottom: 2px solid #fef3c7; padding-bottom: 8px; }
+        p { margin-bottom: 12px; }
+        ul, ol { margin: 12px 0 12px 24px; }
+        li { margin-bottom: 8px; }
+        strong { color: #1e293b; }
+        .footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid #e2e8f0; text-align: center; color: #64748b; font-size: 13px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">tooley</div>
+    </div>
+    <div class="specs">
+        <div class="specs-title">Lesson Specifications</div>
+        <div class="specs-grid">
+            <div class="spec"><strong>Subject:</strong> ${lessonParams.subject}</div>
+            <div class="spec"><strong>Topic:</strong> ${lessonParams.topic}</div>
+            <div class="spec"><strong>Ages:</strong> ${lessonParams.ages} years</div>
+            <div class="spec"><strong>Duration:</strong> ${lessonParams.duration} minutes</div>
+            <div class="spec"><strong>Location:</strong> ${lessonParams.country}</div>
+        </div>
+    </div>
+    <div class="content">
+        ${generatedLesson
+            .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+            .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+            .replace(/^- (.+)$/gm, '<li>$1</li>')
+            .replace(/\n\n/g, '</p><p>')}
+    </div>
+    <div class="footer">Generated by Tooley · tooley.app · Free for all teachers</div>
+</body>
+</html>`;
             const blob = new Blob([html], { type: 'text/html' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
             a.download = `tooley-${lessonParams.topic.toLowerCase().replace(/\s+/g, '-')}.html`;
+            document.body.appendChild(a);
             a.click();
+            document.body.removeChild(a);
             URL.revokeObjectURL(url);
         }
         
