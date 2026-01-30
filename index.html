@@ -7,6 +7,8 @@
     <meta name="description" content="Free AI-powered lesson plan generator for teachers. Create structured, curriculum-aligned lesson plans in minutes. Always free.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Flag icons CSS - bulletproof flag rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
@@ -278,8 +280,14 @@
         }
         
         .meta-flag {
-            font-size: 16px;
-            line-height: 1;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .meta-flag .fi {
+            font-size: 14px;
+            border-radius: 2px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
         }
         
         .card-footer {
@@ -849,19 +857,21 @@
     </footer>
 
     <script>
-        // Country to flag mapping - COMPREHENSIVE
+        // Country to ISO 3166-1 alpha-2 code mapping for flag-icons CSS
         const FLAGS = {
-            'Uganda': '🇺🇬', 'Kenya': '🇰🇪', 'India': '🇮🇳', 'Nigeria': '🇳🇬',
-            'South Africa': '🇿🇦', 'Pakistan': '🇵🇰', 'Philippines': '🇵🇭',
-            'Tanzania': '🇹🇿', 'Ghana': '🇬🇭', 'Bangladesh': '🇧🇩',
-            'Colombia': '🇨🇴', 'Brazil': '🇧🇷', 'Mexico': '🇲🇽', 'Peru': '🇵🇪',
-            'Indonesia': '🇮🇩', 'Vietnam': '🇻🇳', 'Egypt': '🇪🇬', 'Ethiopia': '🇪🇹',
-            'USA': '🇺🇸', 'UK': '🇬🇧', 'Canada': '🇨🇦', 'Australia': '🇦🇺',
-            'Spain': '🇪🇸', 'France': '🇫🇷', 'Germany': '🇩🇪', 'Italy': '🇮🇹',
-            'Japan': '🇯🇵', 'China': '🇨🇳', 'South Korea': '🇰🇷', 'Thailand': '🇹🇭',
-            'Malaysia': '🇲🇾', 'Singapore': '🇸🇬', 'UAE': '🇦🇪', 'Saudi Arabia': '🇸🇦',
-            'Morocco': '🇲🇦', 'Rwanda': '🇷🇼', 'Zambia': '🇿🇲', 'Zimbabwe': '🇿🇼',
-            'Global': '🌍'
+            'Uganda': 'ug', 'Kenya': 'ke', 'India': 'in', 'Nigeria': 'ng',
+            'South Africa': 'za', 'Pakistan': 'pk', 'Philippines': 'ph',
+            'Tanzania': 'tz', 'Ghana': 'gh', 'Bangladesh': 'bd',
+            'Colombia': 'co', 'Brazil': 'br', 'Mexico': 'mx', 'Peru': 'pe',
+            'Indonesia': 'id', 'Vietnam': 'vn', 'Egypt': 'eg', 'Ethiopia': 'et',
+            'USA': 'us', 'UK': 'gb', 'Canada': 'ca', 'Australia': 'au',
+            'Spain': 'es', 'France': 'fr', 'Germany': 'de', 'Italy': 'it',
+            'Japan': 'jp', 'China': 'cn', 'South Korea': 'kr', 'Thailand': 'th',
+            'Malaysia': 'my', 'Singapore': 'sg', 'UAE': 'ae', 'Saudi Arabia': 'sa',
+            'Morocco': 'ma', 'Rwanda': 'rw', 'Zambia': 'zm', 'Zimbabwe': 'zw',
+            'Nepal': 'np', 'Sri Lanka': 'lk', 'Myanmar': 'mm', 'Cambodia': 'kh',
+            'Malawi': 'mw', 'Mozambique': 'mz', 'Cameroon': 'cm', 'Senegal': 'sn',
+            'Global': 'un'
         };
         
         // Subject to icon mapping
@@ -894,8 +904,9 @@
         ];
 
         function getFlag(country) {
-            if (!country) return '🌍';
-            return FLAGS[country] || '🌍';
+            if (!country) return '<span class="fi fi-un"></span>';
+            const code = FLAGS[country] || 'un';
+            return `<span class="fi fi-${code}"></span>`;
         }
         
         function getIcon(subject) {
