@@ -1,4 +1,26 @@
 <!DOCTYPE html>
+<!--
+    TOOLEY WEB APP - app.html
+    Version: 1.2.0
+    Updated: 2026-01-30
+    
+    CHANGELOG:
+    v1.2.0 (2026-01-30)
+    - UX: Added 15 countries to match Telegram bot (was 9)
+    - UI: Hover states now use border thickening instead of yellow fill
+    - UI: More subtle, professional hover feedback
+    
+    v1.1.0 (2026-01-30)
+    - UX: Topic step now shows suggestions first, one-click advances
+    - UX: Custom topic input moved below suggestions with "Go" button
+    - UX: Removed Continue buttons - all selections auto-advance
+    - UI: Smaller buttons, icons, and emojis for more sober design
+    
+    v1.0.0 (2026-01-30)
+    - Initial release
+    - 8-step guided flow: Mode → Subject → Topic → Ages → Duration → Country → Materials → Style
+    - API integration with Railway backend
+-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -163,11 +185,14 @@
         
         .option-btn:hover {
             border-color: var(--amber);
-            background: var(--amber-bg);
+            border-width: 2px;
+            padding: 11.5px 13.5px; /* compensate for border width */
         }
         
         .option-btn.selected {
             border-color: var(--amber-dark);
+            border-width: 2px;
+            padding: 11.5px 13.5px;
             background: var(--amber-pale);
         }
         
@@ -219,11 +244,14 @@
         
         .compact-btn:hover {
             border-color: var(--amber);
-            background: var(--amber-bg);
+            border-width: 2px;
+            padding: 9.5px 17.5px;
         }
         
         .compact-btn.selected {
             border-color: var(--amber-dark);
+            border-width: 2px;
+            padding: 9.5px 17.5px;
             background: var(--amber-pale);
             color: var(--amber-darker);
         }
@@ -250,7 +278,8 @@
         
         .topic-chip:hover {
             border-color: var(--amber);
-            background: var(--amber-bg);
+            border-width: 2px;
+            padding: 7.5px 13.5px;
             color: var(--amber-darker);
         }
         
@@ -328,11 +357,14 @@
         
         .country-btn:hover {
             border-color: var(--amber);
-            background: var(--amber-bg);
+            border-width: 2px;
+            padding: 9.5px 7.5px;
         }
         
         .country-btn.selected {
             border-color: var(--amber-dark);
+            border-width: 2px;
+            padding: 9.5px 7.5px;
             background: var(--amber-pale);
         }
         
@@ -544,7 +576,8 @@
         
         .mode-card:hover {
             border-color: var(--amber);
-            background: var(--amber-bg);
+            border-width: 2px;
+            padding: 15.5px;
         }
         
         .mode-header {
@@ -755,15 +788,21 @@
             </div>
             
             <div class="country-grid">
-                <button class="country-btn" onclick="selectCountry('Kenya')"><span class="fi fi-ke"></span> Kenya</button>
-                <button class="country-btn" onclick="selectCountry('Uganda')"><span class="fi fi-ug"></span> Uganda</button>
-                <button class="country-btn" onclick="selectCountry('Nigeria')"><span class="fi fi-ng"></span> Nigeria</button>
                 <button class="country-btn" onclick="selectCountry('India')"><span class="fi fi-in"></span> India</button>
                 <button class="country-btn" onclick="selectCountry('Pakistan')"><span class="fi fi-pk"></span> Pakistan</button>
+                <button class="country-btn" onclick="selectCountry('Nigeria')"><span class="fi fi-ng"></span> Nigeria</button>
+                <button class="country-btn" onclick="selectCountry('Bangladesh')"><span class="fi fi-bd"></span> Bangladesh</button>
                 <button class="country-btn" onclick="selectCountry('Philippines')"><span class="fi fi-ph"></span> Philippines</button>
-                <button class="country-btn" onclick="selectCountry('Tanzania')"><span class="fi fi-tz"></span> Tanzania</button>
+                <button class="country-btn" onclick="selectCountry('Kenya')"><span class="fi fi-ke"></span> Kenya</button>
+                <button class="country-btn" onclick="selectCountry('Uganda')"><span class="fi fi-ug"></span> Uganda</button>
                 <button class="country-btn" onclick="selectCountry('Ghana')"><span class="fi fi-gh"></span> Ghana</button>
+                <button class="country-btn" onclick="selectCountry('Tanzania')"><span class="fi fi-tz"></span> Tanzania</button>
                 <button class="country-btn" onclick="selectCountry('South Africa')"><span class="fi fi-za"></span> S. Africa</button>
+                <button class="country-btn" onclick="selectCountry('Rwanda')"><span class="fi fi-rw"></span> Rwanda</button>
+                <button class="country-btn" onclick="selectCountry('Jamaica')"><span class="fi fi-jm"></span> Jamaica</button>
+                <button class="country-btn" onclick="selectCountry('United States')"><span class="fi fi-us"></span> USA</button>
+                <button class="country-btn" onclick="selectCountry('United Kingdom')"><span class="fi fi-gb"></span> UK</button>
+                <button class="country-btn" onclick="selectCountry('Australia')"><span class="fi fi-au"></span> Australia</button>
             </div>
             
             <div style="text-align: center; margin-top: 12px;">
