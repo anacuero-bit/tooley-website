@@ -1,4 +1,27 @@
 <!DOCTYPE html>
+<!--
+    TOOLEY LANDING PAGE - index.html
+    Version: 7.5.0
+    Updated: 2026-01-30
+    
+    CHANGELOG:
+    v7.5.0 (2026-01-30)
+    - UI: Standardized button verbs to "Use Telegram" / "Use Browser"
+    - UI: Increased icon size in buttons (26px)
+    - UI: Changed button width from fixed to min-width for flexibility
+    
+    v7.4.0 (2026-01-30)
+    - UI: Both CTA buttons now side-by-side in hero
+    - UI: Browser App button uses outline style (white fill, amber border/text)
+    - UI: Removed "Prefer a simpler interface?" text
+    
+    v7.3.1 (2026-01-30)
+    - Added device detection for smart CTAs
+    
+    v7.3.0 (2026-01-29)
+    - Fixed carousel with CSS flag-icons library
+    - Stable release
+-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -146,7 +169,7 @@
             font-size: 15px;
             text-decoration: none;
             transition: all 0.2s;
-            width: 220px;
+            min-width: 180px;
             background: var(--amber);
             color: var(--white);
             border: 2px solid var(--amber);
@@ -171,8 +194,8 @@
         }
         
         .btn svg {
-            width: 22px;
-            height: 22px;
+            width: 26px;
+            height: 26px;
         }
         
         /* Web App Alternative Link */
@@ -1043,16 +1066,16 @@
                 <div class="btn-wrapper">
                     <a href="https://t.me/TooleyAppBot" class="btn">
                         ${telegramIcon}
-                        Open Telegram App
+                        Use Telegram
                     </a>
-                    <span class="btn-helper">Recommended · voice input available</span>
+                    <span class="btn-helper">Recommended · voice input</span>
                 </div>
                 <div class="btn-wrapper">
                     <a href="app.html" class="btn btn-outline">
                         ${browserIcon}
-                        Use Browser App
+                        Use Browser
                     </a>
-                    <span class="btn-helper">No app required</span>
+                    <span class="btn-helper">No app needed</span>
                 </div>
             `;
         } else {
@@ -1061,14 +1084,14 @@
                 <div class="btn-wrapper">
                     <a href="https://web.telegram.org/k/#@TooleyAppBot" class="btn" target="_blank">
                         ${telegramIcon}
-                        Open Telegram Web
+                        Use Telegram
                     </a>
                     <span class="btn-helper">Recommended · full features</span>
                 </div>
                 <div class="btn-wrapper">
                     <a href="app.html" class="btn btn-outline">
                         ${browserIcon}
-                        Use Browser App
+                        Use Browser
                     </a>
                     <span class="btn-helper">Quick & simple</span>
                 </div>
