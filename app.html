@@ -1,0 +1,1553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tooley - Create a Lesson</title>
+    <meta name="description" content="Free AI-powered lesson plan generator. Create complete lesson plans in minutes.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --amber: #f59e0b;
+            --amber-dark: #d97706;
+            --amber-darker: #b45309;
+            --amber-light: #fbbf24;
+            --amber-pale: #fef3c7;
+            --amber-bg: #fffbeb;
+            --navy: #0f172a;
+            --navy-light: #1e293b;
+            --slate: #334155;
+            --slate-light: #64748b;
+            --white: #ffffff;
+            --gray-50: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --success: #10b981;
+            --success-bg: #d1fae5;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--gray-50);
+            color: var(--navy);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        /* Header */
+        header {
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+            padding: 12px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-inner {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            height: 28px;
+            width: auto;
+        }
+        
+        .header-back {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--slate-light);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .header-back:hover {
+            color: var(--amber-dark);
+        }
+        
+        .header-back svg {
+            width: 18px;
+            height: 18px;
+        }
+        
+        /* Main Container */
+        .app-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 24px 20px 100px;
+        }
+        
+        /* Progress Bar */
+        .progress-bar {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 32px;
+        }
+        
+        .progress-step {
+            flex: 1;
+            height: 4px;
+            background: var(--gray-200);
+            border-radius: 2px;
+            transition: background 0.3s;
+        }
+        
+        .progress-step.active {
+            background: var(--amber);
+        }
+        
+        .progress-step.completed {
+            background: var(--amber-dark);
+        }
+        
+        /* Step Container */
+        .step {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .step.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Step Header */
+        .step-header {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+        
+        .step-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--amber-pale);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin: 0 auto 16px;
+        }
+        
+        .step-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 8px;
+        }
+        
+        .step-subtitle {
+            color: var(--slate-light);
+            font-size: 15px;
+        }
+        
+        /* Option Grid */
+        .options-grid {
+            display: grid;
+            gap: 12px;
+        }
+        
+        .options-grid.two-col {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .option-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 18px;
+            background: var(--white);
+            border: 2px solid var(--gray-200);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+        }
+        
+        .option-btn:hover {
+            border-color: var(--amber);
+            background: var(--amber-bg);
+        }
+        
+        .option-btn.selected {
+            border-color: var(--amber-dark);
+            background: var(--amber-pale);
+        }
+        
+        .option-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gray-100);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        
+        .option-btn.selected .option-icon {
+            background: var(--amber);
+        }
+        
+        .option-text {
+            flex: 1;
+        }
+        
+        .option-label {
+            font-weight: 600;
+            color: var(--navy);
+            font-size: 15px;
+        }
+        
+        .option-desc {
+            font-size: 13px;
+            color: var(--slate-light);
+            margin-top: 2px;
+        }
+        
+        /* Compact Options (for ages, duration) */
+        .compact-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .compact-btn {
+            padding: 12px 20px;
+            background: var(--white);
+            border: 2px solid var(--gray-200);
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 15px;
+            color: var(--navy);
+            transition: all 0.2s;
+            min-width: 80px;
+            text-align: center;
+        }
+        
+        .compact-btn:hover {
+            border-color: var(--amber);
+            background: var(--amber-bg);
+        }
+        
+        .compact-btn.selected {
+            border-color: var(--amber-dark);
+            background: var(--amber);
+            color: var(--white);
+        }
+        
+        /* Country Grid */
+        .country-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+        
+        .country-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 10px;
+            background: var(--white);
+            border: 2px solid var(--gray-200);
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--navy);
+            transition: all 0.2s;
+        }
+        
+        .country-btn:hover {
+            border-color: var(--amber);
+            background: var(--amber-bg);
+        }
+        
+        .country-btn.selected {
+            border-color: var(--amber-dark);
+            background: var(--amber-pale);
+        }
+        
+        .country-btn .fi {
+            font-size: 16px;
+            border-radius: 2px;
+        }
+        
+        /* Text Input */
+        .text-input-group {
+            margin-bottom: 20px;
+        }
+        
+        .text-input {
+            width: 100%;
+            padding: 16px 18px;
+            border: 2px solid var(--gray-200);
+            border-radius: 12px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+        
+        .text-input:focus {
+            outline: none;
+            border-color: var(--amber);
+            box-shadow: 0 0 0 3px var(--amber-pale);
+        }
+        
+        .text-input::placeholder {
+            color: var(--gray-300);
+        }
+        
+        /* Topic Suggestions */
+        .topic-suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 16px;
+        }
+        
+        .topic-chip {
+            padding: 8px 14px;
+            background: var(--gray-100);
+            border: none;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--slate);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .topic-chip:hover {
+            background: var(--amber-pale);
+            color: var(--amber-darker);
+        }
+        
+        /* Navigation */
+        .step-nav {
+            display: flex;
+            gap: 12px;
+            margin-top: 32px;
+        }
+        
+        .nav-btn {
+            flex: 1;
+            padding: 14px 24px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .nav-btn.secondary {
+            background: var(--white);
+            border: 2px solid var(--gray-200);
+            color: var(--slate);
+        }
+        
+        .nav-btn.secondary:hover {
+            border-color: var(--gray-300);
+            background: var(--gray-50);
+        }
+        
+        .nav-btn.primary {
+            background: var(--amber);
+            border: 2px solid var(--amber);
+            color: var(--white);
+        }
+        
+        .nav-btn.primary:hover {
+            background: var(--amber-dark);
+            border-color: var(--amber-dark);
+        }
+        
+        .nav-btn.primary:disabled {
+            background: var(--gray-200);
+            border-color: var(--gray-200);
+            color: var(--gray-400);
+            cursor: not-allowed;
+        }
+        
+        .nav-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+        
+        /* Summary Card */
+        .summary-card {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        
+        .summary-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--amber-dark);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+        
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        
+        .summary-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .summary-icon {
+            font-size: 18px;
+        }
+        
+        .summary-label {
+            font-size: 12px;
+            color: var(--slate-light);
+        }
+        
+        .summary-value {
+            font-weight: 600;
+            color: var(--navy);
+            font-size: 14px;
+        }
+        
+        /* Loading State */
+        .loading-container {
+            text-align: center;
+            padding: 60px 20px;
+        }
+        
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid var(--gray-200);
+            border-top-color: var(--amber);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 24px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .loading-text {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 8px;
+        }
+        
+        .loading-subtext {
+            color: var(--slate-light);
+            font-size: 14px;
+        }
+        
+        /* Result Container */
+        .result-container {
+            background: var(--white);
+            border-radius: 16px;
+            border: 1px solid var(--gray-200);
+            overflow: hidden;
+        }
+        
+        .result-header {
+            background: var(--amber-pale);
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--amber-light);
+        }
+        
+        .result-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 4px;
+        }
+        
+        .result-meta {
+            font-size: 14px;
+            color: var(--slate);
+        }
+        
+        .result-content {
+            padding: 24px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        
+        .result-content h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--amber-dark);
+            margin: 24px 0 12px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--amber-pale);
+        }
+        
+        .result-content h2:first-child {
+            margin-top: 0;
+        }
+        
+        .result-content p {
+            margin-bottom: 12px;
+            color: var(--slate);
+        }
+        
+        .result-content ul, .result-content ol {
+            margin: 12px 0 12px 20px;
+            color: var(--slate);
+        }
+        
+        .result-content li {
+            margin-bottom: 8px;
+        }
+        
+        .result-content strong {
+            color: var(--navy);
+        }
+        
+        /* Action Buttons */
+        .result-actions {
+            padding: 20px 24px;
+            background: var(--gray-50);
+            border-top: 1px solid var(--gray-200);
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+        
+        .action-btn.primary {
+            background: var(--amber);
+            border: none;
+            color: var(--white);
+        }
+        
+        .action-btn.primary:hover {
+            background: var(--amber-dark);
+        }
+        
+        .action-btn.secondary {
+            background: var(--white);
+            border: 2px solid var(--gray-200);
+            color: var(--slate);
+        }
+        
+        .action-btn.secondary:hover {
+            border-color: var(--amber);
+            color: var(--amber-dark);
+        }
+        
+        .action-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+        
+        /* Success Message */
+        .success-message {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 20px;
+            background: var(--success-bg);
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+        
+        .success-icon {
+            width: 24px;
+            height: 24px;
+            background: var(--success);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .success-text {
+            font-weight: 500;
+            color: var(--navy);
+        }
+        
+        /* Error State */
+        .error-container {
+            text-align: center;
+            padding: 40px 20px;
+            background: #fef2f2;
+            border-radius: 16px;
+            border: 1px solid #fecaca;
+        }
+        
+        .error-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+        
+        .error-title {
+            font-weight: 600;
+            color: #991b1b;
+            margin-bottom: 8px;
+        }
+        
+        .error-text {
+            color: #b91c1c;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        
+        /* Welcome Screen */
+        .welcome-container {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .welcome-icon {
+            font-size: 64px;
+            margin-bottom: 24px;
+        }
+        
+        .welcome-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 12px;
+        }
+        
+        .welcome-subtitle {
+            color: var(--slate-light);
+            font-size: 16px;
+            margin-bottom: 40px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .mode-cards {
+            display: grid;
+            gap: 16px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .mode-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px;
+            background: var(--white);
+            border: 2px solid var(--gray-200);
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+        }
+        
+        .mode-card:hover {
+            border-color: var(--amber);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(245, 158, 11, 0.15);
+        }
+        
+        .mode-icon {
+            width: 52px;
+            height: 52px;
+            background: var(--amber-pale);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            flex-shrink: 0;
+        }
+        
+        .mode-content {
+            flex: 1;
+        }
+        
+        .mode-title {
+            font-weight: 700;
+            font-size: 17px;
+            color: var(--navy);
+            margin-bottom: 4px;
+        }
+        
+        .mode-desc {
+            font-size: 13px;
+            color: var(--slate-light);
+            line-height: 1.4;
+        }
+        
+        /* Footer */
+        .app-footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--slate-light);
+            font-size: 13px;
+        }
+        
+        .app-footer a {
+            color: var(--amber-dark);
+            text-decoration: none;
+        }
+        
+        .app-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Mobile Adjustments */
+        @media (max-width: 640px) {
+            .options-grid.two-col {
+                grid-template-columns: 1fr;
+            }
+            
+            .country-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .result-actions {
+                flex-direction: column;
+            }
+            
+            .action-btn {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-inner">
+            <a href="/" class="header-back">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Back
+            </a>
+            <svg class="logo" viewBox="0 0 975 375" xmlns="http://www.w3.org/2000/svg">
+                <g fill="#d97706">
+                    <path d="M87.8 289.8H55.6V149.2H22.7v-27.1h32.9v-52.5h32.2v52.5H120.8v27.1H87.8z"/>
+                    <path d="M136.9 205.8c0-17.4 3.8-32.7 11.3-45.8 7.5-13.1 18-23.5 31.2-31 13.3-7.6 28.3-11.3 45-11.3s31.6 3.8 44.8 11.3c13.1 7.6 23.5 17.9 31 31 7.6 13.1 11.4 28.4 11.4 45.8 0 17.2-3.8 32.4-11.4 45.6-7.5 13.3-17.9 23.7-31 31.2-13.2 7.5-28.1 11.3-44.8 11.3s-31.7-3.8-45-11.3c-13.2-7.5-23.7-17.9-31.2-31.2-7.5-13.2-11.3-28.4-11.3-45.6zm32.6 0c0 17.4 5.1 31.6 15.3 42.7 10.2 11.1 23.4 16.6 39.6 16.6 10.8 0 20.3-2.5 28.5-7.5 8.2-5 14.7-12 19.4-20.9 4.7-8.9 7-19.2 7-30.9s-2.3-22-7-30.9c-4.7-8.9-11.2-15.9-19.4-20.9-8.2-5-17.7-7.5-28.5-7.5-16.2 0-29.4 5.5-39.6 16.5-10.2 10.9-15.3 25.2-15.3 42.8z"/>
+                    <path d="M336.2 205.8c0-17.4 3.8-32.7 11.3-45.8 7.5-13.1 18-23.5 31.2-31 13.3-7.6 28.3-11.3 45-11.3s31.6 3.8 44.8 11.3c13.1 7.6 23.5 17.9 31 31 7.6 13.1 11.4 28.4 11.4 45.8 0 17.2-3.8 32.4-11.4 45.6-7.5 13.3-17.9 23.7-31 31.2-13.2 7.5-28.1 11.3-44.8 11.3s-31.7-3.8-45-11.3c-13.2-7.5-23.7-17.9-31.2-31.2-7.5-13.2-11.3-28.4-11.3-45.6zm32.6 0c0 17.4 5.1 31.6 15.3 42.7 10.2 11.1 23.4 16.6 39.6 16.6 10.8 0 20.3-2.5 28.5-7.5 8.2-5 14.7-12 19.4-20.9 4.7-8.9 7-19.2 7-30.9s-2.3-22-7-30.9c-4.7-8.9-11.2-15.9-19.4-20.9-8.2-5-17.7-7.5-28.5-7.5-16.2 0-29.4 5.5-39.6 16.5-10.2 10.9-15.3 25.2-15.3 42.8z"/>
+                    <path d="M579.3 289.8h-32.2V37.3h32.2z"/>
+                    <path d="M699 293.9c-16.5 0-31-3.7-43.4-11.1-12.5-7.4-22.3-17.7-29.3-30.9-7.1-13.2-10.6-28.4-10.6-45.8 0-17.6 3.4-33 10.3-46.3 6.9-13.3 16.5-23.7 28.8-31.2 12.4-7.6 26.7-11.3 42.9-11.3 16 0 29.9 3.4 41.7 10.3 11.8 6.9 21 16.5 27.5 28.8 6.5 12.3 9.8 26.9 9.8 43.6v12h-129.7c1.1 17.6 6.2 31.2 15.3 40.7 9 9.5 21.5 14.2 37.5 14.2 25.6 0 41.3-9.8 47-29.5h30.2c-4.1 18.1-12.9 32-26.4 41.7-13.5 9.7-30.7 14.8-51.6 14.8zm-1.4-149.5c-14 0-25.3 4-34 12-8.7 8-14.1 19.4-16.1 34.3h96.7c0-14-4.2-25.2-12.7-33.6-8.5-8.5-19.8-12.7-33.9-12.7z"/>
+                    <path d="M791.7 365h-21.6v-26.4h21.6c7.8 0 14.7-1.3 20.8-3.9 6.1-2.6 11-9.2 14.9-19.7l5.8-16.1-67.6-176.7h33.9l48.7 135.2 49.7-135.2h33.3L852.4 328c-5.7 14.4-12.9 24.8-21.6 31.2-8.7 6.4-19.4 9.6-32.2 9.6-5.3 0-10.2-.3-14.8-1-4.5-.7-9-1.5-13.3-2.4z"/>
+                </g>
+            </svg>
+            <div style="width: 60px;"></div>
+        </div>
+    </header>
+
+    <!-- Main App -->
+    <main class="app-container">
+        <!-- Progress Bar -->
+        <div class="progress-bar" id="progressBar" style="display: none;">
+            <div class="progress-step" data-step="1"></div>
+            <div class="progress-step" data-step="2"></div>
+            <div class="progress-step" data-step="3"></div>
+            <div class="progress-step" data-step="4"></div>
+            <div class="progress-step" data-step="5"></div>
+            <div class="progress-step" data-step="6"></div>
+            <div class="progress-step" data-step="7"></div>
+        </div>
+
+        <!-- Step 0: Welcome -->
+        <div class="step active" id="step-0">
+            <div class="welcome-container">
+                <div class="welcome-icon">📚</div>
+                <h1 class="welcome-title">Create a Lesson Plan</h1>
+                <p class="welcome-subtitle">Generate a complete, ready-to-teach lesson plan in under 2 minutes. No account needed.</p>
+                
+                <div class="mode-cards">
+                    <div class="mode-card" onclick="startQuick()">
+                        <div class="mode-icon">⚡</div>
+                        <div class="mode-content">
+                            <div class="mode-title">Quick Lesson</div>
+                            <div class="mode-desc">Pick a subject, we handle the rest. Perfect for a fast start.</div>
+                        </div>
+                    </div>
+                    <div class="mode-card" onclick="startCustom()">
+                        <div class="mode-icon">✨</div>
+                        <div class="mode-content">
+                            <div class="mode-title">Custom Lesson</div>
+                            <div class="mode-desc">Full control over topic, age group, duration, and teaching style.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 1: Subject -->
+        <div class="step" id="step-1">
+            <div class="step-header">
+                <div class="step-icon">📚</div>
+                <h2 class="step-title">What subject?</h2>
+                <p class="step-subtitle">Choose the subject area for your lesson</p>
+            </div>
+            
+            <div class="options-grid">
+                <button class="option-btn" onclick="selectSubject('Mathematics')">
+                    <div class="option-icon">📐</div>
+                    <div class="option-text">
+                        <div class="option-label">Mathematics</div>
+                        <div class="option-desc">Numbers, geometry, problem-solving</div>
+                    </div>
+                </button>
+                <button class="option-btn" onclick="selectSubject('Science')">
+                    <div class="option-icon">🔬</div>
+                    <div class="option-text">
+                        <div class="option-label">Science</div>
+                        <div class="option-desc">Biology, physics, nature, experiments</div>
+                    </div>
+                </button>
+                <button class="option-btn" onclick="selectSubject('Reading')">
+                    <div class="option-icon">📖</div>
+                    <div class="option-text">
+                        <div class="option-label">Reading</div>
+                        <div class="option-desc">Comprehension, phonics, literature</div>
+                    </div>
+                </button>
+                <button class="option-btn" onclick="selectSubject('Language')">
+                    <div class="option-icon">✏️</div>
+                    <div class="option-text">
+                        <div class="option-label">Language Arts</div>
+                        <div class="option-desc">Writing, grammar, vocabulary</div>
+                    </div>
+                </button>
+                <button class="option-btn" onclick="selectSubject('Social Studies')">
+                    <div class="option-icon">🌍</div>
+                    <div class="option-text">
+                        <div class="option-label">Social Studies</div>
+                        <div class="option-desc">History, geography, civics</div>
+                    </div>
+                </button>
+                <button class="option-btn" onclick="selectSubject('Art')">
+                    <div class="option-icon">🎨</div>
+                    <div class="option-text">
+                        <div class="option-label">Art & Music</div>
+                        <div class="option-desc">Creative expression, crafts, music</div>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 2: Topic -->
+        <div class="step" id="step-2">
+            <div class="step-header">
+                <div class="step-icon">📝</div>
+                <h2 class="step-title">What topic?</h2>
+                <p class="step-subtitle">Type your topic or pick a suggestion</p>
+            </div>
+            
+            <div class="text-input-group">
+                <input type="text" class="text-input" id="topicInput" placeholder="e.g., Fractions, Water cycle, Adjectives..." oninput="validateTopic()">
+            </div>
+            
+            <div class="topic-suggestions" id="topicSuggestions">
+                <!-- Filled by JS based on subject -->
+            </div>
+            
+            <div class="step-nav">
+                <button class="nav-btn secondary" onclick="prevStep()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                    Back
+                </button>
+                <button class="nav-btn primary" id="topicNextBtn" onclick="selectTopic()" disabled>
+                    Continue
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 3: Ages -->
+        <div class="step" id="step-3">
+            <div class="step-header">
+                <div class="step-icon">🧒🏽</div>
+                <h2 class="step-title">Student age group?</h2>
+                <p class="step-subtitle">Select the age range of your students</p>
+            </div>
+            
+            <div class="compact-options">
+                <button class="compact-btn" onclick="selectAges('5-7')">5-7</button>
+                <button class="compact-btn" onclick="selectAges('7-9')">7-9</button>
+                <button class="compact-btn" onclick="selectAges('9-11')">9-11</button>
+                <button class="compact-btn" onclick="selectAges('11-13')">11-13</button>
+                <button class="compact-btn" onclick="selectAges('13-15')">13-15</button>
+                <button class="compact-btn" onclick="selectAges('15-18')">15+</button>
+            </div>
+            
+            <div class="step-nav">
+                <button class="nav-btn secondary" onclick="prevStep()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                    Back
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 4: Duration -->
+        <div class="step" id="step-4">
+            <div class="step-header">
+                <div class="step-icon">⏱️</div>
+                <h2 class="step-title">Lesson duration?</h2>
+                <p class="step-subtitle">How long is your class period?</p>
+            </div>
+            
+            <div class="compact-options">
+                <button class="compact-btn" onclick="selectDuration('15')">15 min</button>
+                <button class="compact-btn" onclick="selectDuration('30')">30 min</button>
+                <button class="compact-btn" onclick="selectDuration('45')">45 min</button>
+                <button class="compact-btn" onclick="selectDuration('60')">60 min</button>
+                <button class="compact-btn" onclick="selectDuration('90')">90 min</button>
+            </div>
+            
+            <div class="step-nav">
+                <button class="nav-btn secondary" onclick="prevStep()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                    Back
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 5: Country -->
+        <div class="step" id="step-5">
+            <div class="step-header">
+                <div class="step-icon">📍</div>
+                <h2 class="step-title">Where are you teaching?</h2>
+                <p class="step-subtitle">Helps us use relevant examples</p>
+            </div>
+            
+            <div class="country-grid">
+                <button class="country-btn" onclick="selectCountry('India')"><span class="fi fi-in"></span> India</button>
+                <button class="country-btn" onclick="selectCountry('Nigeria')"><span class="fi fi-ng"></span> Nigeria</button>
+                <button class="country-btn" onclick="selectCountry('Kenya')"><span class="fi fi-ke"></span> Kenya</button>
+                <button class="country-btn" onclick="selectCountry('Philippines')"><span class="fi fi-ph"></span> Philippines</button>
+                <button class="country-btn" onclick="selectCountry('Pakistan')"><span class="fi fi-pk"></span> Pakistan</button>
+                <button class="country-btn" onclick="selectCountry('Uganda')"><span class="fi fi-ug"></span> Uganda</button>
+                <button class="country-btn" onclick="selectCountry('Ghana')"><span class="fi fi-gh"></span> Ghana</button>
+                <button class="country-btn" onclick="selectCountry('Tanzania')"><span class="fi fi-tz"></span> Tanzania</button>
+                <button class="country-btn" onclick="selectCountry('South Africa')"><span class="fi fi-za"></span> S. Africa</button>
+                <button class="country-btn" onclick="selectCountry('Bangladesh')"><span class="fi fi-bd"></span> Bangladesh</button>
+                <button class="country-btn" onclick="selectCountry('USA')"><span class="fi fi-us"></span> USA</button>
+                <button class="country-btn" onclick="selectCountry('UK')"><span class="fi fi-gb"></span> UK</button>
+            </div>
+            
+            <div style="text-align: center; margin-top: 16px;">
+                <button class="compact-btn" onclick="selectCountry('Global')" style="min-width: 140px;">🌍 Global / Other</button>
+            </div>
+            
+            <div class="step-nav">
+                <button class="nav-btn secondary" onclick="prevStep()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                    Back
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 6: Materials -->
+        <div class="step" id="step-6">
+            <div class="step-header">
+                <div class="step-icon">📦</div>
+                <h2 class="step-title">Available materials?</h2>
+                <p class="step-subtitle">What resources do you have access to?</p>
+            </div>
+            
+            <div class="options-grid">
+                <button class="option-btn" onclick="selectMaterials('none')">
+                    <div class="option-icon">🎭</div>
+                    <div class="option-text">
+                        <div class="option-label">No Materials</div>
+                        <div class="option-desc">Verbal activities, movement, imagination only</div>
+                    </div>
+                </button>
+                <button class="option-btn" onclick="selectMaterials('basic')">
+                    <div class="option-icon">📝</div>
+                    <div class="option-text">
+                        <div class="option-label">Basic Supplies</div>
+                        <div class="option-desc">Paper, pencils, blackboard</div>
+                    </div>
+                </button>
+                <button class="option-btn" onclick="selectMaterials('standard')">
+                    <div class="option-icon">📦</div>
+                    <div class="option-text">
+                        <div class="option-label">Full Classroom</div>
+                        <div class="option-desc">Standard classroom supplies available</div>
+                    </div>
+                </button>
+            </div>
+            
+            <div class="step-nav">
+                <button class="nav-btn secondary" onclick="prevStep()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                    Back
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 7: Style -->
+        <div class="step" id="step-7">
+            <div class="step-header">
+                <div class="step-icon">🎯</div>
+                <h2 class="step-title">Teaching style?</h2>
+                <p class="step-subtitle">How do you like to teach?</p>
+            </div>
+            
+            <div class="options-grid">
+                <button class="option-btn" onclick="selectStyle('interactive')">
+                    <div class="option-icon">🎮</div>
+                    <div class="option-text">
+                        <div class="option-label">Interactive</div>
+                        <div class="option-desc">Games, discussions, group activities</div>
+                    </div>
+                </button>
+                <button class="option-btn" onclick="selectStyle('structured')">
+                    <div class="option-icon">📋</div>
+                    <div class="option-text">
+                        <div class="option-label">Structured</div>
+                        <div class="option-desc">Clear steps, direct instruction</div>
+                    </div>
+                </button>
+                <button class="option-btn" onclick="selectStyle('storytelling')">
+                    <div class="option-icon">📖</div>
+                    <div class="option-text">
+                        <div class="option-label">Story-based</div>
+                        <div class="option-desc">Narratives, examples, real-world connections</div>
+                    </div>
+                </button>
+                <button class="option-btn" onclick="selectStyle('mixed')">
+                    <div class="option-icon">⚖️</div>
+                    <div class="option-text">
+                        <div class="option-label">Mixed</div>
+                        <div class="option-desc">Balanced combination of approaches</div>
+                    </div>
+                </button>
+            </div>
+            
+            <div class="step-nav">
+                <button class="nav-btn secondary" onclick="prevStep()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                    Back
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 8: Confirm & Generate -->
+        <div class="step" id="step-8">
+            <div class="step-header">
+                <div class="step-icon">✨</div>
+                <h2 class="step-title">Ready to generate!</h2>
+                <p class="step-subtitle">Review your selections</p>
+            </div>
+            
+            <div class="summary-card">
+                <div class="summary-title">Your Lesson</div>
+                <div class="summary-grid" id="summaryGrid">
+                    <!-- Filled by JS -->
+                </div>
+            </div>
+            
+            <div class="step-nav">
+                <button class="nav-btn secondary" onclick="prevStep()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                    Back
+                </button>
+                <button class="nav-btn primary" onclick="generateLesson()">
+                    Generate Lesson
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 9: Loading -->
+        <div class="step" id="step-9">
+            <div class="loading-container">
+                <div class="loading-spinner"></div>
+                <div class="loading-text">Creating your lesson plan...</div>
+                <div class="loading-subtext">This usually takes 10-20 seconds</div>
+            </div>
+        </div>
+
+        <!-- Step 10: Result -->
+        <div class="step" id="step-10">
+            <div class="result-container">
+                <div class="result-header">
+                    <div class="result-title" id="resultTitle">Lesson Plan</div>
+                    <div class="result-meta" id="resultMeta"></div>
+                </div>
+                <div class="result-content" id="resultContent">
+                    <!-- Filled by JS -->
+                </div>
+                <div class="result-actions">
+                    <button class="action-btn primary" onclick="downloadPDF()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                        Download PDF
+                    </button>
+                    <button class="action-btn secondary" onclick="downloadHTML()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+                        Download HTML
+                    </button>
+                    <button class="action-btn secondary" onclick="copyToClipboard()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                        Copy Text
+                    </button>
+                    <button class="action-btn secondary" onclick="startOver()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 005.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 013.51 15"/></svg>
+                        New Lesson
+                    </button>
+                </div>
+            </div>
+            
+            <div class="success-message" id="copySuccess" style="display: none;">
+                <div class="success-icon">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+                </div>
+                <div class="success-text">Copied to clipboard!</div>
+            </div>
+        </div>
+
+        <!-- Error State -->
+        <div class="step" id="step-error">
+            <div class="error-container">
+                <div class="error-icon">😕</div>
+                <div class="error-title">Something went wrong</div>
+                <div class="error-text" id="errorText">Unable to generate lesson. Please try again.</div>
+                <button class="nav-btn primary" onclick="startOver()" style="display: inline-flex; width: auto;">
+                    Try Again
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <a href="/">tooley.app</a> · Free lesson plans for teachers worldwide
+    </footer>
+
+    <script>
+        // ============================================================================
+        // CONFIG - Update this with your deployed API URL
+        // ============================================================================
+        const API_URL = 'https://tooley-api.up.railway.app'; // Update when deployed
+        
+        // ============================================================================
+        // STATE
+        // ============================================================================
+        let currentStep = 0;
+        let isQuickMode = false;
+        let lessonParams = {
+            subject: '',
+            topic: '',
+            ages: '9-11',
+            duration: '30',
+            country: 'Global',
+            materials: 'basic',
+            style: 'mixed'
+        };
+        let generatedLesson = '';
+        
+        // Topic suggestions by subject
+        const TOPICS = {
+            'Mathematics': ['Addition', 'Subtraction', 'Multiplication', 'Fractions', 'Geometry', 'Place value', 'Measurement', 'Time'],
+            'Science': ['Water cycle', 'Plants', 'Animals', 'Magnets', 'States of matter', 'Human body', 'Weather', 'Simple machines'],
+            'Reading': ['Main idea', 'Comprehension', 'Phonics', 'Story elements', 'Making predictions', 'Sight words'],
+            'Language': ['Nouns', 'Verbs', 'Adjectives', 'Sentences', 'Writing paragraphs', 'Punctuation', 'Vocabulary'],
+            'Social Studies': ['Community helpers', 'Maps', 'History', 'Geography', 'Cultures', 'Rules and laws'],
+            'Art': ['Drawing', 'Color mixing', 'Patterns', 'Collage', 'Nature art', 'Portraits']
+        };
+        
+        // ============================================================================
+        // NAVIGATION
+        // ============================================================================
+        function showStep(stepNum) {
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.getElementById(`step-${stepNum}`).classList.add('active');
+            currentStep = stepNum;
+            updateProgress();
+        }
+        
+        function updateProgress() {
+            const bar = document.getElementById('progressBar');
+            if (currentStep === 0 || currentStep >= 9) {
+                bar.style.display = 'none';
+            } else {
+                bar.style.display = 'flex';
+                document.querySelectorAll('.progress-step').forEach((step, i) => {
+                    step.classList.remove('active', 'completed');
+                    if (i + 1 < currentStep) step.classList.add('completed');
+                    if (i + 1 === currentStep) step.classList.add('active');
+                });
+            }
+        }
+        
+        function prevStep() {
+            if (currentStep > 1) {
+                showStep(currentStep - 1);
+            } else {
+                showStep(0);
+            }
+        }
+        
+        function nextStep() {
+            showStep(currentStep + 1);
+        }
+        
+        // ============================================================================
+        // MODE SELECTION
+        // ============================================================================
+        function startQuick() {
+            isQuickMode = true;
+            showStep(1);
+        }
+        
+        function startCustom() {
+            isQuickMode = false;
+            showStep(1);
+        }
+        
+        // ============================================================================
+        // SELECTIONS
+        // ============================================================================
+        function selectSubject(subject) {
+            lessonParams.subject = subject;
+            highlightSelected(event.currentTarget);
+            
+            // Update topic suggestions
+            const suggestions = TOPICS[subject] || [];
+            const container = document.getElementById('topicSuggestions');
+            container.innerHTML = suggestions.map(t => 
+                `<button class="topic-chip" onclick="setTopic('${t}')">${t}</button>`
+            ).join('');
+            
+            if (isQuickMode) {
+                // Auto-select random topic and generate
+                lessonParams.topic = suggestions[Math.floor(Math.random() * suggestions.length)] || 'General';
+                showStep(8);
+                updateSummary();
+            } else {
+                setTimeout(() => showStep(2), 200);
+            }
+        }
+        
+        function setTopic(topic) {
+            document.getElementById('topicInput').value = topic;
+            validateTopic();
+        }
+        
+        function validateTopic() {
+            const input = document.getElementById('topicInput');
+            const btn = document.getElementById('topicNextBtn');
+            btn.disabled = input.value.trim().length < 2;
+        }
+        
+        function selectTopic() {
+            lessonParams.topic = document.getElementById('topicInput').value.trim();
+            showStep(3);
+        }
+        
+        function selectAges(ages) {
+            lessonParams.ages = ages;
+            highlightSelected(event.currentTarget);
+            setTimeout(() => showStep(4), 200);
+        }
+        
+        function selectDuration(duration) {
+            lessonParams.duration = duration;
+            highlightSelected(event.currentTarget);
+            setTimeout(() => showStep(5), 200);
+        }
+        
+        function selectCountry(country) {
+            lessonParams.country = country;
+            highlightSelected(event.currentTarget);
+            setTimeout(() => showStep(6), 200);
+        }
+        
+        function selectMaterials(materials) {
+            lessonParams.materials = materials;
+            highlightSelected(event.currentTarget);
+            setTimeout(() => showStep(7), 200);
+        }
+        
+        function selectStyle(style) {
+            lessonParams.style = style;
+            highlightSelected(event.currentTarget);
+            setTimeout(() => {
+                updateSummary();
+                showStep(8);
+            }, 200);
+        }
+        
+        function highlightSelected(btn) {
+            btn.closest('.options-grid, .compact-options, .country-grid')
+               ?.querySelectorAll('button').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+        }
+        
+        // ============================================================================
+        // SUMMARY
+        // ============================================================================
+        function updateSummary() {
+            const grid = document.getElementById('summaryGrid');
+            const materialsMap = { none: 'No materials', basic: 'Basic supplies', standard: 'Full classroom' };
+            const styleMap = { interactive: 'Interactive', structured: 'Structured', storytelling: 'Story-based', mixed: 'Mixed' };
+            
+            grid.innerHTML = `
+                <div class="summary-item">
+                    <span class="summary-icon">📚</span>
+                    <div>
+                        <div class="summary-label">Subject</div>
+                        <div class="summary-value">${lessonParams.subject}</div>
+                    </div>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-icon">📝</span>
+                    <div>
+                        <div class="summary-label">Topic</div>
+                        <div class="summary-value">${lessonParams.topic}</div>
+                    </div>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-icon">🧒🏽</span>
+                    <div>
+                        <div class="summary-label">Ages</div>
+                        <div class="summary-value">${lessonParams.ages} years</div>
+                    </div>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-icon">⏱️</span>
+                    <div>
+                        <div class="summary-label">Duration</div>
+                        <div class="summary-value">${lessonParams.duration} minutes</div>
+                    </div>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-icon">📍</span>
+                    <div>
+                        <div class="summary-label">Location</div>
+                        <div class="summary-value">${lessonParams.country}</div>
+                    </div>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-icon">📦</span>
+                    <div>
+                        <div class="summary-label">Materials</div>
+                        <div class="summary-value">${materialsMap[lessonParams.materials]}</div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // ============================================================================
+        // LESSON GENERATION - Calls Tooley API on Railway
+        // ============================================================================
+        async function generateLesson() {
+            showStep(9);
+            
+            try {
+                const response = await fetch(`${API_URL}/api/lesson`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(lessonParams)
+                });
+                
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({}));
+                    throw new Error(errorData.error || 'API error');
+                }
+                
+                const data = await response.json();
+                generatedLesson = data.lesson;
+                
+                displayResult();
+                showStep(10);
+            } catch (error) {
+                console.error('Generation error:', error);
+                document.getElementById('errorText').textContent = 
+                    error.message || 'Unable to generate lesson. Please try again.';
+                showStep('error');
+            }
+        }
+        
+        function displayResult() {
+            document.getElementById('resultTitle').textContent = lessonParams.topic;
+            document.getElementById('resultMeta').textContent = 
+                `${lessonParams.subject} · Ages ${lessonParams.ages} · ${lessonParams.duration} min`;
+            
+            // Convert markdown to HTML
+            let html = generatedLesson
+                .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+                .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+                .replace(/^- (.+)$/gm, '<li>$1</li>')
+                .replace(/^(\d+)\. (.+)$/gm, '<li>$2</li>')
+                .replace(/\n\n/g, '</p><p>')
+                .replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+            
+            document.getElementById('resultContent').innerHTML = `<p>${html}</p>`;
+        }
+        
+        // ============================================================================
+        // DOWNLOADS
+        // ============================================================================
+        async function downloadPDF() {
+            try {
+                const response = await fetch(`${API_URL}/api/pdf`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        content: generatedLesson,
+                        ...lessonParams
+                    })
+                });
+                
+                if (!response.ok) throw new Error('PDF generation failed');
+                
+                const blob = await response.blob();
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `tooley-${lessonParams.topic.toLowerCase().replace(/\s+/g, '-')}.pdf`;
+                a.click();
+                URL.revokeObjectURL(url);
+            } catch (error) {
+                alert('PDF download failed. Please try copying the text instead.');
+            }
+        }
+        
+        function downloadHTML() {
+            const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${lessonParams.topic} - Lesson Plan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; max-width: 800px; margin: 0 auto; padding: 40px 20px; color: #0f172a; }
+        .header { border-bottom: 2px solid #d97706; padding-bottom: 16px; margin-bottom: 24px; }
+        .logo { color: #d97706; font-size: 24px; font-weight: 700; }
+        .specs { background: #fffbeb; padding: 20px; border-radius: 8px; margin-bottom: 24px; }
+        .specs-title { color: #d97706; font-size: 12px; font-weight: 700; text-transform: uppercase; margin-bottom: 12px; }
+        .spec { margin-bottom: 6px; }
+        .spec strong { color: #334155; }
+        h2 { color: #d97706; font-size: 18px; margin: 24px 0 12px; border-bottom: 2px solid #fef3c7; padding-bottom: 6px; }
+        p { margin-bottom: 12px; line-height: 1.6; }
+        ul, ol { margin: 12px 0 12px 24px; }
+        li { margin-bottom: 8px; }
+        .footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #e2e8f0; text-align: center; color: #64748b; font-size: 13px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">tooley</div>
+    </div>
+    <div class="specs">
+        <div class="specs-title">Lesson Specifications</div>
+        <div class="spec"><strong>Subject:</strong> ${lessonParams.subject}</div>
+        <div class="spec"><strong>Topic:</strong> ${lessonParams.topic}</div>
+        <div class="spec"><strong>Ages:</strong> ${lessonParams.ages} years</div>
+        <div class="spec"><strong>Duration:</strong> ${lessonParams.duration} minutes</div>
+        <div class="spec"><strong>Location:</strong> ${lessonParams.country}</div>
+    </div>
+    <div class="content">
+        ${generatedLesson.replace(/^## (.+)$/gm, '<h2>$1</h2>').replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/^- (.+)$/gm, '<li>$1</li>').replace(/\n\n/g, '</p><p>')}
+    </div>
+    <div class="footer">Generated by Tooley · tooley.app · Free for all teachers</div>
+</body>
+</html>`;
+            
+            const blob = new Blob([html], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `tooley-${lessonParams.topic.toLowerCase().replace(/\s+/g, '-')}.html`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        function copyToClipboard() {
+            navigator.clipboard.writeText(generatedLesson).then(() => {
+                const msg = document.getElementById('copySuccess');
+                msg.style.display = 'flex';
+                setTimeout(() => msg.style.display = 'none', 2000);
+            });
+        }
+        
+        // ============================================================================
+        // RESET
+        // ============================================================================
+        function startOver() {
+            lessonParams = {
+                subject: '',
+                topic: '',
+                ages: '9-11',
+                duration: '30',
+                country: 'Global',
+                materials: 'basic',
+                style: 'mixed'
+            };
+            generatedLesson = '';
+            document.getElementById('topicInput').value = '';
+            document.querySelectorAll('.selected').forEach(b => b.classList.remove('selected'));
+            showStep(0);
+        }
+        
+        // Initialize
+        updateProgress();
+    </script>
+</body>
+</html>
