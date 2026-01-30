@@ -149,11 +149,25 @@
             width: 220px;
             background: var(--amber);
             color: var(--white);
+            border: 2px solid var(--amber);
         }
         
         .btn:hover {
             background: var(--amber-dark);
+            border-color: var(--amber-dark);
             transform: translateY(-1px);
+        }
+        
+        /* Outline variant - white fill, amber border/text */
+        .btn.btn-outline {
+            background: var(--white);
+            color: var(--amber-dark);
+            border: 2px solid var(--amber);
+        }
+        
+        .btn.btn-outline:hover {
+            background: var(--amber-bg);
+            border-color: var(--amber-dark);
         }
         
         .btn svg {
@@ -1024,7 +1038,7 @@
         const secondaryOption = document.getElementById('secondaryOption');
         
         if (isMobile) {
-            // MOBILE: Primary = Telegram App, Secondary = Web App
+            // MOBILE: Primary = Telegram App, Secondary = Browser App
             heroCtas.innerHTML = `
                 <div class="btn-wrapper">
                     <a href="https://t.me/TooleyAppBot" class="btn">
@@ -1033,17 +1047,16 @@
                     </a>
                     <span class="btn-helper">Recommended · voice input available</span>
                 </div>
-            `;
-            secondaryOption.innerHTML = `
-                <p class="web-alternative-text">Don't have Telegram?</p>
-                <a href="app.html" class="web-app-link">
-                    ${browserIcon}
-                    Use Browser App
-                    <span class="web-app-badge">New</span>
-                </a>
+                <div class="btn-wrapper">
+                    <a href="app.html" class="btn btn-outline">
+                        ${browserIcon}
+                        Use Browser App
+                    </a>
+                    <span class="btn-helper">No app required</span>
+                </div>
             `;
         } else {
-            // DESKTOP: Primary = Telegram Web, Secondary = Web App
+            // DESKTOP: Primary = Telegram Web, Secondary = Browser App
             heroCtas.innerHTML = `
                 <div class="btn-wrapper">
                     <a href="https://web.telegram.org/k/#@TooleyAppBot" class="btn" target="_blank">
@@ -1052,16 +1065,18 @@
                     </a>
                     <span class="btn-helper">Recommended · full features</span>
                 </div>
-            `;
-            secondaryOption.innerHTML = `
-                <p class="web-alternative-text">Prefer a simpler interface?</p>
-                <a href="app.html" class="web-app-link">
-                    ${browserIcon}
-                    Use Browser App
-                    <span class="web-app-badge">New</span>
-                </a>
+                <div class="btn-wrapper">
+                    <a href="app.html" class="btn btn-outline">
+                        ${browserIcon}
+                        Use Browser App
+                    </a>
+                    <span class="btn-helper">Quick & simple</span>
+                </div>
             `;
         }
+        
+        // Hide secondary option div since both buttons are now in heroCtas
+        secondaryOption.style.display = 'none';
     </script>
 </body>
 </html>
