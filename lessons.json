@@ -2,6 +2,16 @@
   "lastUpdated": "2026-02-01T10:44:15.061386Z",
   "lessons": [
     {
+      "id": "les_ebea26f6",
+      "subject": "Language",
+      "topic": "Spelling patterns",
+      "ages": "7-9",
+      "duration": "30",
+      "country": "Bangladesh",
+      "teacher": "Chino",
+      "created": "2026-02-02T11:12:40.069379Z"
+    },
+    {
       "id": "les_3b463e3d",
       "subject": "Art",
       "topic": "Collage",
@@ -209,28 +219,6 @@
       "teacher_name": "Priya S.",
       "public": true,
       "created_at": "2026-01-28T11:00:00Z"
-    },
-    {
-      "id": "les_sample3",
-      "subject": "Language",
-      "topic": "Storytelling Basics",
-      "ages": "6-8",
-      "duration": "30",
-      "country": "Nigeria",
-      "teacher_name": "Teacher Chioma",
-      "public": true,
-      "created_at": "2026-01-28T12:00:00Z"
-    },
-    {
-      "id": "les_sample4",
-      "subject": "Social Studies",
-      "topic": "Community Helpers",
-      "ages": "7-9",
-      "duration": "35",
-      "country": "Philippines",
-      "teacher_name": "Teacher Joy",
-      "public": true,
-      "created_at": "2026-01-28T13:00:00Z"
     }
   ]
 }
