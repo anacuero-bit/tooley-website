@@ -1,26 +1,18 @@
 <!DOCTYPE html>
 <!--
     TOOLEY LANDING PAGE - index.html
-    Version: 7.5.0
-    Updated: 2026-01-30
+    Version: 7.6.0
+    Updated: 2026-02-02
     
     CHANGELOG:
+    v7.6.0 (2026-02-02)
+    - NEW: Language switcher in header (EN | ES)
+    - Links to index-es.html for Spanish version
+    
     v7.5.0 (2026-01-30)
     - UI: Standardized button verbs to "Use Telegram" / "Use Browser"
     - UI: Increased icon size in buttons (26px)
     - UI: Changed button width from fixed to min-width for flexibility
-    
-    v7.4.0 (2026-01-30)
-    - UI: Both CTA buttons now side-by-side in hero
-    - UI: Browser App button uses outline style (white fill, amber border/text)
-    - UI: Removed "Prefer a simpler interface?" text
-    
-    v7.3.1 (2026-01-30)
-    - Added device detection for smart CTAs
-    
-    v7.3.0 (2026-01-29)
-    - Fixed carousel with CSS flag-icons library
-    - Stable release
 -->
 <html lang="en">
 <head>
@@ -30,7 +22,6 @@
     <meta name="description" content="Free AI-powered lesson plan generator for teachers. Create structured, curriculum-aligned lesson plans in minutes. Always free.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Flag icons CSS - bulletproof flag rendering -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -57,7 +48,6 @@
             overflow-x: hidden;
         }
 
-        /* Header - Clean, no center text */
         header {
             position: sticky;
             top: 0;
@@ -81,7 +71,40 @@
             width: auto;
         }
         
-        /* Donate CTA in header - white with amber border */
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        /* Language Switcher */
+        .lang-switch {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 6px 12px;
+            background: var(--gray-50);
+            border-radius: 6px;
+            font-size: 13px;
+        }
+        
+        .lang-switch a {
+            color: var(--slate);
+            text-decoration: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+        
+        .lang-switch a:hover {
+            color: var(--amber-dark);
+        }
+        
+        .lang-switch a.active {
+            background: var(--amber);
+            color: var(--white);
+        }
+        
         .header-cta {
             display: inline-flex;
             align-items: center;
@@ -108,7 +131,6 @@
             height: 16px;
         }
 
-        /* Hero - Single color headline */
         .hero {
             padding: 80px 24px 60px;
             text-align: center;
@@ -157,7 +179,6 @@
             font-weight: 500;
         }
         
-        /* Both buttons same amber color and width */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -181,7 +202,6 @@
             transform: translateY(-1px);
         }
         
-        /* Outline variant - white fill, amber border/text */
         .btn.btn-outline {
             background: var(--white);
             color: var(--amber-dark);
@@ -198,56 +218,12 @@
             height: 26px;
         }
         
-        /* Web App Alternative Link */
         .web-alternative {
             margin-top: 28px;
             padding-top: 24px;
             border-top: 1px solid var(--gray-200);
         }
-        
-        .web-alternative-text {
-            font-size: 14px;
-            color: var(--slate);
-            margin-bottom: 12px;
-        }
-        
-        .web-app-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 24px;
-            background: var(--white);
-            border: 2px solid var(--gray-200);
-            border-radius: 8px;
-            color: var(--navy);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 14px;
-            transition: all 0.2s;
-        }
-        
-        .web-app-link:hover {
-            border-color: var(--amber);
-            background: var(--amber-bg);
-            color: var(--amber-dark);
-        }
-        
-        .web-app-link svg {
-            width: 20px;
-            height: 20px;
-        }
-        
-        .web-app-badge {
-            background: var(--amber-light);
-            color: var(--amber-dark);
-            font-size: 10px;
-            font-weight: 700;
-            padding: 2px 6px;
-            border-radius: 4px;
-            text-transform: uppercase;
-        }
 
-        /* Lessons Carousel - BEFORE How It Works */
         .lessons-section {
             padding: 80px 0 60px;
             overflow: hidden;
@@ -396,7 +372,6 @@
             border-radius: 4px;
         }
 
-        /* How It Works */
         .how-it-works {
             padding: 80px 24px;
             background: var(--gray-50);
@@ -477,7 +452,6 @@
             text-align: center;
         }
 
-        /* Why Tooley Section - White bg, centered like other sections */
         .why-tooley {
             padding: 80px 24px;
             background: var(--white);
@@ -545,7 +519,6 @@
             text-decoration: none;
         }
 
-        /* Footer - Clean alignment */
         footer {
             background: var(--navy);
             color: var(--white);
@@ -589,7 +562,6 @@
             color: var(--amber);
         }
         
-        /* Open Source Badges */
         .footer-badges {
             display: flex;
             align-items: center;
@@ -618,7 +590,6 @@
             fill: currentColor;
         }
         
-        /* Heart line in footer */
         .footer-heart-line {
             text-align: center;
             font-size: 13px;
@@ -630,7 +601,6 @@
             color: var(--amber);
         }
         
-        /* Disclaimer */
         .footer-disclaimer {
             font-size: 11px;
             color: rgba(255,255,255,0.4);
@@ -640,7 +610,6 @@
             margin: 0 auto 20px;
         }
         
-        /* Footer Bottom */
         .footer-bottom {
             display: flex;
             justify-content: space-between;
@@ -699,12 +668,25 @@
             color: var(--amber);
         }
 
-        /* Mobile */
         @media (max-width: 768px) {
             .footer-grid {
                 grid-template-columns: 1fr;
                 gap: 28px;
                 text-align: center;
+            }
+            
+            .header-right {
+                gap: 10px;
+            }
+            
+            .header-cta {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .lang-switch {
+                padding: 4px 8px;
+                font-size: 12px;
             }
         }
         
@@ -757,12 +739,10 @@
                 flex-wrap: wrap;
                 justify-content: center;
             }
-            
         }
     </style>
 </head>
 <body>
-    <!-- Header - Logo + Donate CTA only -->
     <header>
         <div class="header-inner">
             <svg class="logo" viewBox="0 0 975 375" xmlns="http://www.w3.org/2000/svg">
@@ -775,32 +755,29 @@
                     <path d="M791.7 365h-21.6v-26.4h21.6c7.8 0 14.7-1.3 20.8-3.9 6.1-2.6 11-9.2 14.9-19.7l5.8-16.1-67.6-176.7h33.9l48.7 135.2 49.7-135.2h33.3L852.4 328c-5.7 14.4-12.9 24.8-21.6 31.2-8.7 6.4-19.4 9.6-32.2 9.6-5.3 0-10.2-.3-14.8-1-4.5-.7-9-1.5-13.3-2.4z"/>
                 </g>
             </svg>
-            <a href="https://buymeacoffee.com/tooleyapp" class="header-cta" target="_blank">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-                Support Tooley
-            </a>
+            <div class="header-right">
+                <div class="lang-switch">
+                    <a href="index.html" class="active">EN</a>
+                    <a href="index-es.html">ES</a>
+                </div>
+                <a href="https://buymeacoffee.com/tooleyapp" class="header-cta" target="_blank">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                    Support Tooley
+                </a>
+            </div>
         </div>
     </header>
 
-    <!-- Hero - Single color headline, both buttons same amber -->
     <section class="hero">
         <div class="hero-content">
             <h1>AI lesson plans for every teacher</h1>
             <p>Create structured, curriculum-aligned lesson plans in minutes. No materials required. Always free.</p>
             
-            <!-- Primary CTA - Changes based on device -->
-            <div class="hero-buttons" id="heroCtas">
-                <!-- Populated by JavaScript based on device -->
-            </div>
-            
-            <!-- Secondary option -->
-            <div class="web-alternative" id="secondaryOption">
-                <!-- Populated by JavaScript -->
-            </div>
+            <div class="hero-buttons" id="heroCtas"></div>
+            <div class="web-alternative" id="secondaryOption"></div>
         </div>
     </section>
 
-    <!-- Lessons Carousel - BEFORE How It Works -->
     <section class="lessons-section">
         <div class="lessons-header">
             <h2>Lessons Created by Teachers</h2>
@@ -811,7 +788,6 @@
         </div>
     </section>
 
-    <!-- How It Works -->
     <section class="how-it-works">
         <div class="section-header">
             <h2>How It Works</h2>
@@ -842,7 +818,6 @@
         </div>
     </section>
 
-    <!-- Why Tooley Section - Clean white design -->
     <section class="why-tooley">
         <div class="why-tooley-inner">
             <h2><span>🎓</span> Why "Tooley"?</h2>
@@ -855,17 +830,15 @@
         </div>
     </section>
 
-    <!-- Footer - Clean 3-column grid -->
     <footer>
         <div class="footer-inner">
-            <!-- 3-Column Grid -->
             <div class="footer-grid">
                 <div class="footer-col">
                     <h4>Get Started</h4>
                     <a href="https://t.me/TooleyAppBot">Telegram Bot</a>
                     <a href="https://web.telegram.org/k/#@TooleyAppBot">Telegram Web</a>
                     <a href="app.html">Web App</a>
-                    <a href="/cdn-cgi/l/email-protection#c4aca1a8a8ab84b0ababa8a1bdeaa5b4b4">Contact Us</a>
+                    <a href="#">Contact Us</a>
                 </div>
                 <div class="footer-col">
                     <h4>Resources</h4>
@@ -881,7 +854,6 @@
                 </div>
             </div>
             
-            <!-- Open Source Badges -->
             <div class="footer-badges">
                 <div class="badge">
                     <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
@@ -897,17 +869,14 @@
                 </div>
             </div>
             
-            <!-- Built with love -->
             <div class="footer-heart-line">
                 Built with <span class="heart">❤️</span> for teachers worldwide
             </div>
             
-            <!-- Disclaimer -->
             <div class="footer-disclaimer">
                 <strong>Disclaimer:</strong> Tooley generates lesson plans using AI. All content should be reviewed and adapted by teachers for their specific classroom needs and local curriculum requirements.
             </div>
             
-            <!-- Bottom -->
             <div class="footer-bottom">
                 <div class="footer-logo-area">
                     <svg class="footer-logo" viewBox="0 0 975 375" xmlns="http://www.w3.org/2000/svg">
@@ -930,15 +899,13 @@
                 </div>
             </div>
             
-            <!-- Design Credit -->
             <div class="footer-credit">
                 Developed in Dubai by <a href="https://yellow.digital" target="_blank">yellow.digital</a>
             </div>
         </div>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        // Country to ISO 3166-1 alpha-2 code mapping for flag-icons CSS
+    <script>
         const FLAGS = {
             'Uganda': 'ug', 'Kenya': 'ke', 'India': 'in', 'Nigeria': 'ng',
             'South Africa': 'za', 'Pakistan': 'pk', 'Philippines': 'ph',
@@ -946,31 +913,17 @@
             'Colombia': 'co', 'Brazil': 'br', 'Mexico': 'mx', 'Peru': 'pe',
             'Indonesia': 'id', 'Vietnam': 'vn', 'Egypt': 'eg', 'Ethiopia': 'et',
             'USA': 'us', 'UK': 'gb', 'Canada': 'ca', 'Australia': 'au',
-            'Spain': 'es', 'France': 'fr', 'Germany': 'de', 'Italy': 'it',
-            'Japan': 'jp', 'China': 'cn', 'South Korea': 'kr', 'Thailand': 'th',
-            'Malaysia': 'my', 'Singapore': 'sg', 'UAE': 'ae', 'Saudi Arabia': 'sa',
-            'Morocco': 'ma', 'Rwanda': 'rw', 'Zambia': 'zm', 'Zimbabwe': 'zw',
-            'Nepal': 'np', 'Sri Lanka': 'lk', 'Myanmar': 'mm', 'Cambodia': 'kh',
-            'Malawi': 'mw', 'Mozambique': 'mz', 'Cameroon': 'cm', 'Senegal': 'sn',
             'Global': 'un'
         };
         
-        // Subject to icon mapping
         const ICONS = {
-            'Mathematics': '📐', 'Math': '📐', 'Maths': '📐',
-            'Science': '🔬',
-            'Reading': '📚',
-            'Language': '✏️', 'Language Arts': '✏️', 'English': '✏️',
-            'Social Studies': '🌍', 'History': '🌍', 'Geography': '🌍',
-            'Art': '🎨', 'Art & Music': '🎨', 'Music': '🎵',
-            'Physical Education': '⚽', 'PE': '⚽',
-            'General': '📝'
+            'Mathematics': '📐', 'Math': '📐', 'Science': '🔬',
+            'Reading': '📚', 'Language': '✏️', 'Language Arts': '✏️',
+            'Social Studies': '🌍', 'Art': '🎨', 'General': '📝'
         };
         
-        // Lesson types
         const TYPES = ['Interactive', 'Hands-on', 'Discussion', 'Workshop', 'Activity', 'Practice', 'Creative', 'Experiment'];
         
-        // DEFAULT LESSONS - Complete data for carousel
         const DEFAULT_LESSONS = [
             { subject: "Mathematics", topic: "Fractions: Fair Sharing", country: "Kenya", ages: "8-10", duration: "45", teacher_name: "Teacher Mary" },
             { subject: "Science", topic: "The Water Cycle", country: "India", ages: "10-12", duration: "40", teacher_name: "Priya S." },
@@ -985,13 +938,11 @@
         ];
 
         function getFlag(country) {
-            if (!country) return '<span class="fi fi-un"></span>';
             const code = FLAGS[country] || 'un';
             return `<span class="fi fi-${code}"></span>`;
         }
         
         function getIcon(subject) {
-            if (!subject) return '📝';
             return ICONS[subject] || '📝';
         }
         
@@ -1000,29 +951,22 @@
         }
 
         function createCard(lesson, index) {
-            const subject = lesson.subject || 'General';
-            const country = lesson.country || 'Global';
-            const ages = lesson.ages || 'All ages';
-            const duration = lesson.duration || '30';
-            const topic = lesson.topic || 'Untitled';
-            const author = lesson.teacher_name || lesson.author || 'Teacher';
-            
             return `
                 <div class="lesson-card">
                     <div class="card-header">
-                        <div class="card-icon">${getIcon(subject)}</div>
+                        <div class="card-icon">${getIcon(lesson.subject)}</div>
                         <div class="card-title-area">
-                            <div class="card-subject">${subject}</div>
-                            <div class="card-topic">${topic}</div>
+                            <div class="card-subject">${lesson.subject || 'General'}</div>
+                            <div class="card-topic">${lesson.topic || 'Untitled'}</div>
                         </div>
                     </div>
                     <div class="card-meta">
-                        <span class="meta-item"><span class="meta-flag">${getFlag(country)}</span> ${country}</span>
-                        <span class="meta-item">👤 ${ages}</span>
-                        <span class="meta-item">⏱ ${duration} min</span>
+                        <span class="meta-item"><span class="meta-flag">${getFlag(lesson.country)}</span> ${lesson.country || 'Global'}</span>
+                        <span class="meta-item">👤 ${lesson.ages || 'All ages'}</span>
+                        <span class="meta-item">⏱ ${lesson.duration || '30'} min</span>
                     </div>
                     <div class="card-footer">
-                        <span class="card-author">by ${author}</span>
+                        <span class="card-author">by ${lesson.teacher_name || 'Teacher'}</span>
                         <span class="card-type">${getType(index)}</span>
                     </div>
                 </div>
@@ -1031,27 +975,21 @@
 
         function renderCarousel(lessons) {
             const carousel = document.getElementById('carousel');
-            // Duplicate for infinite scroll effect
             const allLessons = [...lessons, ...lessons];
             carousel.innerHTML = allLessons.map((l, i) => createCard(l, i)).join('');
         }
 
-        // Load lessons - try JSON first, fall back to defaults
         fetch('lessons.json')
             .then(r => r.json())
             .then(data => {
                 if (data.lessons && data.lessons.length > 0) {
-                    const combined = [...data.lessons, ...DEFAULT_LESSONS];
-                    renderCarousel(combined);
+                    renderCarousel([...data.lessons, ...DEFAULT_LESSONS]);
                 } else {
                     renderCarousel(DEFAULT_LESSONS);
                 }
             })
             .catch(() => renderCarousel(DEFAULT_LESSONS));
 
-        // ============================================================================
-        // DEVICE DETECTION & SMART CTAs
-        // ============================================================================
         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         
         const telegramIcon = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>`;
@@ -1061,44 +999,29 @@
         const secondaryOption = document.getElementById('secondaryOption');
         
         if (isMobile) {
-            // MOBILE: Primary = Telegram App, Secondary = Browser App
             heroCtas.innerHTML = `
                 <div class="btn-wrapper">
-                    <a href="https://t.me/TooleyAppBot" class="btn">
-                        ${telegramIcon}
-                        Use Telegram
-                    </a>
+                    <a href="https://t.me/TooleyAppBot" class="btn">${telegramIcon} Use Telegram</a>
                     <span class="btn-helper">Recommended · voice input</span>
                 </div>
                 <div class="btn-wrapper">
-                    <a href="app.html" class="btn btn-outline">
-                        ${browserIcon}
-                        Use Browser
-                    </a>
+                    <a href="app.html" class="btn btn-outline">${browserIcon} Use Browser</a>
                     <span class="btn-helper">No app needed</span>
                 </div>
             `;
         } else {
-            // DESKTOP: Primary = Telegram Web, Secondary = Browser App
             heroCtas.innerHTML = `
                 <div class="btn-wrapper">
-                    <a href="https://web.telegram.org/k/#@TooleyAppBot" class="btn" target="_blank">
-                        ${telegramIcon}
-                        Use Telegram
-                    </a>
+                    <a href="https://web.telegram.org/k/#@TooleyAppBot" class="btn" target="_blank">${telegramIcon} Use Telegram</a>
                     <span class="btn-helper">Recommended · full features</span>
                 </div>
                 <div class="btn-wrapper">
-                    <a href="app.html" class="btn btn-outline">
-                        ${browserIcon}
-                        Use Browser
-                    </a>
+                    <a href="app.html" class="btn btn-outline">${browserIcon} Use Browser</a>
                     <span class="btn-helper">Quick & simple</span>
                 </div>
             `;
         }
         
-        // Hide secondary option div since both buttons are now in heroCtas
         secondaryOption.style.display = 'none';
     </script>
 </body>
